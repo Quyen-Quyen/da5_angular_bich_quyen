@@ -1,0 +1,61 @@
+<div class="row my-3 bg-white" style="margin-left: 0px; margin-right: 0px;">
+
+<h3 class="fs-4 mb-3">Quản lý bài viết</h3>
+<div class="col ">
+
+  <button type="button" class="btn btn-primary mb-3 " style="float: right;" data-bs-toggle="modal" data-bs-target="#add">
+    Thêm mới
+</button>
+
+<table class="table table-striped rounded shadow-sm  bg-white ">
+  <!-- <table class="table   table-hover"> -->
+    <thead>
+      <tr>
+        <td scope="col" width="50" >#</td>
+        <td>Loại bài viết</td>
+        <td >Chức năng</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let type of type_post;let i = index">
+      <td>{{i+1}}</td>
+      <td>{{type.name}}</td>
+      <!-- <td>{{type.content}}</td> -->
+      <td>
+        
+        <a class="btn btn-secondary" style="margin-right: 10px ;" [routerLink]="['/admin/type-posts-edit/',type.id]">Sửa</a>
+        <button type="button" class="btn btn-danger"(click)="onDelete(type.id)">Xóa</button>
+        
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal thêm mới -->
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <form action="" method="POST" [formGroup]="type_post_fromCreate" (ngSubmit)="onCreate()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <div class="form-group">
+            <label for="">Loại bài viết</label>
+            <input type="text" formControlName="name" class="form-control" placeholder="Loại bài viết">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+</div> 
+</div>

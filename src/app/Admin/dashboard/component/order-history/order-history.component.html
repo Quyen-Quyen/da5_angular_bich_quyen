@@ -1,0 +1,72 @@
+<div class="row my-3 bg-white" style="margin-left: 0px; margin-right: 0px;">
+  <h3 class="fs-4 mb-3">Lịch sử đơn đặt hàng</h3>
+<div class="col ">
+
+  <button type="button" class="btn btn-primary mb-3 " style="float: right;" data-bs-toggle="modal" data-bs-target="#add">
+    Thêm mới
+</button>
+
+<table class="table table-striped rounded shadow-sm  bg-white ">
+    <thead>
+      <tr>
+        <td scope="col" width="50" >#</td>
+        <td>Tên sản phẩm</td>
+        <td>Tên khách hàng</td>
+        <td >Đơn hàng</td>
+        <td >Chức năng</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of order_history;let i = index">
+      <td>{{i+1}}</td>
+      <td>{{order.product_id}}</td>
+      <td>{{order.customer_id}}</td>
+      <td>{{order.order_id}}</td>
+
+      <td>
+        
+        <a class="btn btn-secondary" style="margin-right: 10px ;" [routerLink]="['/admin/order-history-edit/',order.id]">Sửa</a>
+        <button type="button" class="btn btn-danger"(click)="onDelete(order.id)">Xóa</button>
+        
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal thêm mới -->
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <form action=""  method="POST" [formGroup]="order_history_fromCreate" (ngSubmit)="onCreate()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <div class="form-group">
+            <label for="">Sản phẩm</label>
+            <input type="text"  formControlName="product_id" class="form-control" placeholder="Sản phẩm">
+          </div>
+          <div class="form-group">
+            <label for="">Khách hàng</label>
+            <input type="text" formControlName="customer_id" class="form-control" placeholder="Khách hàng">
+          </div>
+          <div class="form-group">
+            <label for="">Đơn hàng</label>
+
+            <input type="text" formControlName="order_id" class="form-control" placeholder="Đơn hàng">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+</div> 
+</div>

@@ -1,0 +1,131 @@
+
+<div class="row my-3 bg-white" style="margin-left: 0px; margin-right: 0px;">
+  <h3 class="fs-4 mb-3">Quản lý sản phẩm</h3>
+  <div class="col ">
+    <button type="button" class="btn btn-primary mb-3 " style="float: right;" data-bs-toggle="modal"
+      data-bs-target="#add">
+      Thêm mới
+    </button>
+
+    <table class="table  rounded shadow-sm  bg-white ">
+      <!-- <table class="table   table-hover"> -->
+      <thead>
+        <tr>
+          <td scope="col" width="50">#</td>
+          <td>Loại sản phẩm</td>
+          <td>Tên sản phẩm</td>
+          <td>Giá ban đầu</td>
+          <td>Giá hiện tại</td>
+          <td>Số lượng</td>
+          <td>Ảnh</td>
+          <td>mô tả sản phẩm</td>
+          <td>Chức năng</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pro of product | paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index" >
+
+    <!-- <br> -->
+          <td>{{i+1}}</td>
+          <td>{{pro.name_cate}}</td>
+          <td>{{pro.name}}</td>
+          <td>{{pro.default_price|number:'0.1-5'}} Vnđ</td>
+          <td>{{pro.price|number:'0.1-5'}} Vnđ</td>
+          <td>{{ pro.amount }}</td>
+          <!-- <td>{{pro.image}}</td> -->
+          <img src="{{ pro.img_src }}" alt="" style="width: 80px; height: 80px">
+          <!-- <td>{{pro.description|sanitizeHtml  }}</td> -->
+          <td  [innerHTML]="pro.description | sanitizeHtml"></td>
+          <td>
+
+
+            <a class="btn btn-secondary" style="margin-right: 10px ;"
+              [routerLink]="['/admin/product-edit/',pro.id]">Sửa</a>
+            <button type="button" class="btn btn-danger" (click)="onDelete(pro.id)">Xóa</button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="ontableDataChange($event)">
+      </pagination-controls>
+    </div>
+
+    <!-- Modal thêm mới -->
+    <div class="modal fade" id="add" tabindex="-1"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content" style=" background-color: gainsboro;">
+          <form action="" method="pro" [formGroup]="product_fromCreate" (ngSubmit)="onCreate()">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col">
+                  <!-- <br> -->
+                  <label for="">Loại sản phẩm</label>
+                  <div class="form-group">
+                    <select formControlName="category_id" style="width: 100%; height: 30px; border-radius: 20px;">
+                      <option [ngValue]="null" disabled>--Chọn loại sản phẩm--</option>
+                      <option *ngFor="let cate of category_product" [ngValue]="cate.id">{{cate.name_cate}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col">
+                  <label for="">Tên sản phẩm</label>
+                  <input style="border-radius: 20px" type="text" formControlName="name" class="form-control"
+                    placeholder="Tên sản phẩm">
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="">Giá ban đầu</label>
+
+                    <input type="number" style="border-radius: 20px"  formControlName="default_price" class="form-control" placeholder="Giá ban đầu">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="">Giá hiện tại</label>
+                    <input type="number" style="border-radius: 20px"  formControlName="price" class="form-control" placeholder="Giá hiện tại">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="">Ảnh demo</label>
+                <!-- <input type="file" formControlName="image" class="form-control" placeholder="Nội dung"> -->
+                <!-- <img [src]="url"  height="200" width="200" alt=""><br> -->
+                <!-- <input type="file"  formControlName="image" (change)="onFileSelected($event)" multiple> -->
+                <input type="file"  formControlName="image" (change)="updateImage($event)" >
+
+                <!-- <input type="file" formControlName="image" (change)="handleFileInput($event)" > -->
+                
+            
+                <!-- <button type="button" (click)=""> </button> -->
+              </div>
+              <div class="form-group">
+                <label for="">Số lượng</label>
+                <input type="text" formControlName="amount" class="form-control" placeholder="Nhập số lượng">
+              </div>
+              <div class="form-group">
+                <label for="">mô tả sản phẩm</label>
+                <ckeditor formControlName="description"></ckeditor>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Lưu</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

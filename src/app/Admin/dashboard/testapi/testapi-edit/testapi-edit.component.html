@@ -1,0 +1,33 @@
+<div class="row my-3 bg-white" style="margin-left: 0px; margin-right: 0px;">
+<form action="" method="POST" [formGroup]="testapifromedit" (ngSubmit)="onEdit()" class="mb-5">
+  <div class="form-group">
+    <label for="">tên</label>
+    <input type="text" formControlName="name" class="form-control" placeholder="ten" >
+  </div>
+  <div class="form-group">
+    <label for="">Tuổi</label>
+    <input type="text" formControlName="age" class="form-control" placeholder="tuoi" >
+  </div>
+  <div class="form-group">
+    <label for="">giới tính</label>
+    <input type="text" formControlName="sex" class="form-control" placeholder="gioi tinh" >
+  </div>
+  <div class="form-group">
+    <label for="">số điện thoại</label>
+    <input type="text" formControlName="phone" class="form-control" placeholder="so dien thoai" >
+  </div>
+  <br>
+  <!-- <button type="submit" >gửi</button> -->
+  <div style="text-align: center;">
+    
+    <button type="button" [routerLink]="['/admin/testapi']" class="btn btn-secondary" >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+      </svg>
+      quay lại</button>
+      <button type="submit" class="btn btn-primary" style="margin-left: 5px;" >Save</button>
+      
+    </div>
+</form>
+</div>
+

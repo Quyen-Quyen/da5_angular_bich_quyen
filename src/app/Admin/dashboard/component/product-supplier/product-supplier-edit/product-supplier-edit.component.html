@@ -1,0 +1,40 @@
+<div class="row my-3 bg-white" style="margin-left: 0px; margin-right: 0px;">
+<form action="" method="POST" [formGroup]="product_supplier_fromEdit" (ngSubmit)="onEdit()" class="mb-5">
+  <div class="form-group">
+    <label for="">Thông tin nhà cung cấp</label>
+    <input type="text" formControlName="info_supplier_id" class="form-control" placeholder="Thông tin nhà cung cấp">
+  </div>
+  <div class="form-group">
+    <label for="">Tên sản phẩm</label>
+    <input type="text" formControlName="name" class="form-control" placeholder="Tên sản phẩm">
+  </div>
+  <div class="form-group">
+    <label for="">số lượng</label>
+
+    <input type="text" formControlName="amount" class="form-control" placeholder="số lượng">
+  </div>
+  <div class="form-group">
+    <label for="">Cân nặng</label>
+    <input type="text" formControlName="weight" class="form-control" placeholder="Cân nặng">
+  </div>
+  <div class="form-group">
+    <label for="">Giá tiền</label>
+    <input type="text" formControlName="price" class="form-control" placeholder="Giá tiền">
+  </div>
+  <div class="form-group">
+    <label for="">Mô tả</label>
+    <input type="text" formControlName="description" class="form-control" placeholder="Mô tả">
+  </div>
+  <br>
+  <div style="text-align: center;">
+    
+    <button type="button" [routerLink]="['/admin/product-supplier']" class="btn btn-secondary" >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+      </svg>
+      quay lại</button>
+      <button type="submit" class="btn btn-primary" style="margin-left: 5px;" >Lưu</button>
+      
+    </div>
+</form>
+</div>

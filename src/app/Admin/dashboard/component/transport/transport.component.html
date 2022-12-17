@@ -1,0 +1,73 @@
+
+<div class="row my-3 bg-white" style="margin-left: 0px; margin-right: 0px;">
+  <h3 class="fs-4 mb-3">Quản lý bài viết</h3>
+<div class="col ">
+
+  <button type="button" class="btn btn-primary mb-3 " style="float: right;" data-bs-toggle="modal" data-bs-target="#add">
+    Thêm mới
+</button>
+
+<table class="table table-striped rounded shadow-sm  bg-white ">
+  <!-- <table class="table   table-hover"> -->
+    <thead>
+      <tr>
+        <td scope="col" width="50" >#</td>
+        <td>Nhân viên</td>
+        <td>Trạng thái đơn hàng</td>
+        <td>Thời gian dự kiến</td>
+        <td >Chức năng</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let trans of transport;let i = index">
+      <td>{{i+1}}</td>
+      <td>{{trans.staff_id}}</td>
+      <td>{{trans.status_oder}}</td>
+      <td>{{trans.intend_time}}</td>
+      <td>
+        
+        <a class="btn btn-secondary" style="margin-right: 10px ;" [routerLink]="['/admin/transport-edit/',trans.id]">Sửa</a>
+        <button type="button" class="btn btn-danger"(click)="onDelete(trans.id)">Xóa</button>
+        
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal thêm mới -->
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <form action="" method="trans" [formGroup]="transport_fromCreate" (ngSubmit)="onCreate()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <div class="form-group">
+            <label for="">Nhân viên</label>
+            <input type="text" formControlName="staff_id" class="form-control" placeholder="Nhân viên">
+          </div>
+          <div class="form-group">
+            <label for="">Trạng thái đơn hàng</label>
+            <input type="text" formControlName="status_oder" class="form-control" placeholder="Trạng thái đơn hàng">
+          </div>
+          <div class="form-group">
+            <label for="">Thời gian dự kiến</label>
+
+            <input type="text" formControlName="intend_time" class="form-control" placeholder="Thời gian dự kiến">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+</div> 
+</div>

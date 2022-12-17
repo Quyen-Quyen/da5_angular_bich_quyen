@@ -1,0 +1,84 @@
+<div class="row my-3 bg-white" style="margin-left: 0px; margin-right: 0px;">
+  <h3 class="fs-4 mb-3">Quản lý video</h3>
+<div class="col ">
+
+  <button type="button" class="btn btn-primary mb-3 " style="float: right;" data-bs-toggle="modal" data-bs-target="#add">
+    Thêm mới
+</button>
+
+<table class="table table-striped rounded shadow-sm  bg-white ">
+  <!-- <table class="table   table-hover"> -->
+    <thead>
+      <tr>
+        <td scope="col" width="50" >#</td>
+        <td>Tiêu đề</td>
+        <td>Loại video</td>
+        <td >link video</td>
+        <td >Mô tả</td>
+        <td >Chức năng</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let video of video;let i = index">
+      <td>{{i+1}}</td>
+      <td>{{video.title}}</td>
+      <td>{{video.name}}</td>
+      <td>{{video.video}}</td>
+      <td [innerHTML]="video.description | sanitizeHtml"></td>
+      <td>
+        
+        <a class="btn btn-secondary" style="margin-right: 10px ;" [routerLink]="['/admin/video-edit/',video.id]">Sửa</a>
+        <button type="button" class="btn btn-danger"(click)="onDelete(video.id)">Xóa</button>
+        
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal thêm mới -->
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <form action="" method="POST" [formGroup]="video_fromCreate" (ngSubmit)="onCreate()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <div class="form-group">
+            <label for="">Tiêu đề </label>
+            <input type="text" formControlName="title" class="form-control" placeholder="Tiêu đề">
+          </div>
+          <div class="form-group">
+            <label for="">Loại video</label>
+            <!-- <input type="text" formControlName="type_video_id" class="form-control" placeholder="Loại video"> -->
+            <select formControlName="type_video_id" >
+              <option [ngValue]="null" disabled>--Chọn loại sản phẩm--</option>
+              <option *ngFor="let video of type_video" [ngValue]="video.id">{{video.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="">Video</label>
+
+            <input type="text" formControlName="video" class="form-control" placeholder="Video">
+          </div>
+          <div class="form-group">
+            <label for="">Mô tả</label>
+            <!-- <input type="text" formControlName="description" class="form-control" placeholder="Mô tả"> -->
+            <ckeditor formControlName="description"></ckeditor>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+</div> 
+</div>
+

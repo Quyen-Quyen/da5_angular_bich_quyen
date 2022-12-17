@@ -1,0 +1,91 @@
+<div class="row my-3 bg-white" style="margin-left: 0px; margin-right: 0px;">
+<h3 class="fs-4 mb-3">Quản lý Sản phẩm của nhà cung cấp</h3>
+<div class="col ">
+
+  <button type="button" class="btn btn-primary mb-3 " style="float: right;" data-bs-toggle="modal" data-bs-target="#add">
+    Thêm mới
+</button>
+
+<table class="table table-striped rounded shadow-sm  bg-white ">
+  <!-- <table class="table   table-hover"> -->
+    <thead>
+      <tr>
+        <td scope="col" width="50" >#</td>
+        <td>Thông tin nhà cung cấp</td>
+        <td>Tên sản phẩm</td>
+        <td>số lượng</td>
+        <td >Cân nặng </td>
+        <td >Giá tiền </td>
+        <td >Mô tả </td>
+        <td >Chức năng</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pd_sup of product_supplier;let i = index">
+      <td>{{i+1}}</td>
+      <td>{{pd_sup.info_supplier_id}}</td>
+      <td>{{pd_sup.name}}</td>
+      <td>{{pd_sup.amount}}</td>
+      <td>{{pd_sup.weight}}</td>
+      <td>{{pd_sup.price}}</td>
+      <td>{{pd_sup.description}}</td>
+      <td>
+        
+        <a class="btn btn-secondary" style="margin-right: 10px ;" [routerLink]="['/admin/product-supplier-edit/',pd_sup.id]">Sửa</a>
+        <button type="button" class="btn btn-danger"(click)="onDelete(pd_sup.id)">Xóa</button>
+        
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal thêm mới -->
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <form action="" method="POST" [formGroup]="product_supplier_fromCreate" (ngSubmit)="onCreate()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <div class="form-group">
+            <label for="">Thông tin nhà cung cấp</label>
+            <input type="text" formControlName="info_supplier_id" class="form-control" placeholder="Thông tin nhà cung cấp">
+          </div>
+          <div class="form-group">
+            <label for="">Tên sản phẩm</label>
+            <input type="text" formControlName="name" class="form-control" placeholder="Tên sản phẩm">
+          </div>
+          <div class="form-group">
+            <label for="">số lượng</label>
+
+            <input type="text" formControlName="amount" class="form-control" placeholder="số lượng">
+          </div>
+          <div class="form-group">
+            <label for="">Cân nặng</label>
+            <input type="text" formControlName="weight" class="form-control" placeholder="Cân nặng">
+          </div>
+          <div class="form-group">
+            <label for="">Giá tiền</label>
+            <input type="text" formControlName="price" class="form-control" placeholder="Giá tiền">
+          </div>
+          <div class="form-group">
+            <label for="">Mô tả</label>
+            <input type="text" formControlName="description" class="form-control" placeholder="Mô tả">
+          </div>
+     
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+</div> 
+</div>

@@ -1,0 +1,51 @@
+<!-- Blog Section Begin -->
+<section class="blog spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-5">
+                <div class="blog__sidebar">
+                    <div class="blog__sidebar__search">
+                        <form action="#">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div>
+                    <div class="blog__sidebar__item">
+                        <h4>Danh mục thể loại video</h4>
+                        <ul *ngFor="let item of type_video">
+                            <li><a href="#">{{ item.name }}</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-7">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6"
+                        *ngFor="let item of video  | paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
+                        <div class="blog__item">
+                            <div class="blog__item__pic">
+                                <iframe width="350" height="300"
+                                    [src]="'https://www.youtube.com/embed/'+item.video|santizeiframe">
+                                </iframe>
+                            </div>
+                            <div class="blog__item__text">
+                                <h5><a href="#">{{ item.title }}</a></h5>
+                                <p [innerHTML]="item.description | sanitizeHtml"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+
+                        <div>
+                            <pagination-controls previousLabel="<" nextLabel=">"
+                                (pageChange)="ontableDataChange($event)">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
