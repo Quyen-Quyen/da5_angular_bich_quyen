@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let cate of category_product;let i = index">
+    <tr *ngFor="let cate of category_product| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
       <td>{{i+1}}</td>
       <td>{{cate.name}}</td>
       <td>{{cate.name_supplier}}</td>
@@ -33,6 +33,10 @@
     </tr>
   </tbody>
 </table>
+<div>
+  <pagination-controls previousLabel="" nextLabel="" (pageChange)="ontableDataChange($event)">
+  </pagination-controls>
+</div>
 
 <!-- Modal thêm mới -->
 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

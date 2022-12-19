@@ -13,7 +13,7 @@
         <tr>
           <td scope="col" width="50">#</td>
           <td>Loại sản phẩm</td>
-          <td>Tên sản phẩm</td>
+          <td>Tên sản phẩm</td> 
           <td>Giá ban đầu</td>
           <td>Giá hiện tại</td>
           <td>Số lượng</td>
@@ -48,16 +48,16 @@
       </tbody>
     </table>
     <div>
-      <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="ontableDataChange($event)">
+      <pagination-controls previousLabel="" nextLabel="" (pageChange)="ontableDataChange($event)">
       </pagination-controls>
     </div>
 
     <!-- Modal thêm mới -->
     <div class="modal fade" id="add" tabindex="-1"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content" style=" background-color: gainsboro;">
-          <form action="" method="pro" [formGroup]="product_fromCreate" (ngSubmit)="onCreate()">
+      aria-labelledby="exampleModalLabel" aria-hidden="true"  >
+      <div class="modal-dialog modal-xl"style="max-width:1500px !important" >
+        <div class="modal-content" style=" background-color: gainsboro">
+          <form action="" method="POST" [formGroup]="product_fromCreate" (ngSubmit)="onCreate()">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -97,22 +97,21 @@
                   </div>
                 </div>
               </div>
-
+              <div class="row">
+                <div class="col">
               <div class="form-group">
                 <label for="">Ảnh demo</label>
-                <!-- <input type="file" formControlName="image" class="form-control" placeholder="Nội dung"> -->
-                <!-- <img [src]="url"  height="200" width="200" alt=""><br> -->
-                <!-- <input type="file"  formControlName="image" (change)="onFileSelected($event)" multiple> -->
+                <img [src]="url"  height="200" width="200" alt=""><br>
                 <input type="file"  formControlName="image" (change)="updateImage($event)" >
 
-                <!-- <input type="file" formControlName="image" (change)="handleFileInput($event)" > -->
-                
-            
-                <!-- <button type="button" (click)=""> </button> -->
               </div>
+              </div>
+              <div class="col">
               <div class="form-group">
                 <label for="">Số lượng</label>
-                <input type="text" formControlName="amount" class="form-control" placeholder="Nhập số lượng">
+                <input type="number" style="border-radius: 20px"  formControlName="amount" class="form-control" placeholder="Nhập số lượng">
+              </div>
+              </div>
               </div>
               <div class="form-group">
                 <label for="">mô tả sản phẩm</label>

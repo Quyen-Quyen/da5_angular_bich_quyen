@@ -17,7 +17,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let type of type_post;let i = index">
+    <tr *ngFor="let type of type_post| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
       <td>{{i+1}}</td>
       <td>{{type.name}}</td>
       <!-- <td>{{type.content}}</td> -->
@@ -30,6 +30,10 @@
     </tr>
   </tbody>
 </table>
+<div>
+  <pagination-controls previousLabel="" nextLabel="" (pageChange)="ontableDataChange($event)">
+  </pagination-controls>
+</div>
 
 <!-- Modal thêm mới -->
 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

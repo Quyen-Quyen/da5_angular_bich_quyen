@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let trans of transport;let i = index">
+    <tr *ngFor="let trans of transport| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
       <td>{{i+1}}</td>
       <td>{{trans.staff_id}}</td>
       <td>{{trans.status_oder}}</td>
@@ -33,6 +33,10 @@
     </tr>
   </tbody>
 </table>
+<div>
+  <pagination-controls previousLabel="" nextLabel="" (pageChange)="ontableDataChange($event)">
+  </pagination-controls>
+</div>
 
 <!-- Modal thêm mới -->
 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

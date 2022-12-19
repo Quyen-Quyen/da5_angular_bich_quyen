@@ -11,6 +11,13 @@ import { AdminService } from 'src/app/service/admin.service';
 export class CustomerComponent implements OnInit {
   private subscription: Subscription;
   customer :any;
+      //phân trang
+  // POSTS: any;
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 8;
+  tableSizes: any = [5, 10, 15, 20];
+  //end
   constructor(private admin: AdminService ) { }
   submitted:boolean = false;
   customer_fromCreate: FormGroup = new FormGroup({
@@ -57,4 +64,14 @@ export class CustomerComponent implements OnInit {
       this.getall_customer();
     })
   }
+      //phân trang
+      ontableDataChange(event: any) {
+        this.page = event;
+        this.getall_customer();
+      }
+      ontableSizeChange(event: any): void {
+        this.tableSize = event.target.value;
+        this.page = 1;
+        this.getall_customer();
+      }
 }

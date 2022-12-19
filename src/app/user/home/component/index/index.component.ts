@@ -11,12 +11,20 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class IndexComponent implements OnInit {
   // data_setbg:any;
+  posts:any;
     categories_section_begin:any;
     category:any;
     show_by_cate_product_13:any;
     show_by_cate_product_14:any;
     show_by_cate_product_15:any;
     all_product:any;
+          //phân trang
+  // POSTS: any;
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 8;
+  tableSizes: any = [5, 10, 15, 20];
+  //end
     
     customOptions: any = {
       loop: true,
@@ -48,7 +56,8 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
 
       this.getall_categories_section_begin();
-      this.get_prodcut_by_cate();
+      this.get_posts();
+      // this.get_prodcut_by_cate();
   
 
   }
@@ -66,14 +75,27 @@ export class IndexComponent implements OnInit {
     )
 
 }
-get_prodcut_by_cate(){
-  this.subscription = this.admin.get_product_by_cate().subscribe((data:any)=>{
-    console.log(data);
-    this.show_by_cate_product_13=data.show_by_cate_product_13;
-    this.show_by_cate_product_14=data.show_by_cate_product_14;
-    this.show_by_cate_product_15=data.show_by_cate_product_15;
 
-  })
+get_posts(){
+  this.subscription = this.admin.get_index_posts().subscribe((data:any)=>{
+    console.log(data.posts_index);
+    // console.log(data.type_posts);
+    this.posts = data.posts_index;
+    // this.type_posts = data.type_posts;
+},error =>{
+  console.log(error);
+})
 }
+
+  //phân trang
+  ontableDataChange(event: any) {
+    this.page = event;
+    this.getall_categories_section_begin();
+  }
+  ontableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.getall_categories_section_begin();
+  }
 
 }

@@ -422,7 +422,7 @@ export class AdminService {
   }
   //them sản phẩm
   create_product(data:any): Observable<any> {
-    return this._httpClient.post<any>(this.API_URL + 'product/',data, {
+    return this._httpClient.post<any>(this.API_URL + 'product/',data,{
       headers: {
         Authorization: this.code_tokens
       }
@@ -684,8 +684,8 @@ get_detail_posts(id: number): Observable<any> {
   return this._httpClient.get<any>(this.API_URL + 'get_posts/' + id);
 }
 
-get_product_by_cate(): Observable<any> {
-  return this._httpClient.get<any>(this.API_URL + 'get_product_by_category/');
+get_product_by_cate(category: number): Observable<any> {
+  return this._httpClient.get<any>(this.API_URL + 'get_product_by_category?category='+ category);
 }
 
 

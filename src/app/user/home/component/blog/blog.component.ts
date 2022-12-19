@@ -23,11 +23,11 @@ export class BlogComponent implements OnInit {
   private subscription: Subscription
   // public elementSrc = [];
   ngOnInit() {
-    this.get_video();
+    this.get_posts();
   }
   
   
-  get_video(){
+  get_posts(){
     this.subscription = this.admin.get_index_posts().subscribe((data:any)=>{
       console.log(data.posts);
       console.log(data.type_posts);
@@ -42,12 +42,12 @@ export class BlogComponent implements OnInit {
   //phân trang
   ontableDataChange(event: any) {
     this.page = event;
-    this.get_video();
+    this.get_posts();
   }
   ontableSizeChange(event: any): void {
     this.tableSize = event.target.value;
     this.page = 1;
-    this.get_video();
+    this.get_posts();
   }
 
 }

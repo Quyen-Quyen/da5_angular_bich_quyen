@@ -1289,10 +1289,10 @@ ol {
 }
 
 .product__discount__item:hover .product__discount__item__pic .product__item__pic__hover {
-	bottom: 20px;
+	bottom: 130px;
 }
 
-.product__discount__item__pic {
+.product__discount__item__pic img{
 	height: 270px;
 	position: relative;
 	overflow: hidden;
@@ -1308,7 +1308,7 @@ ol {
 	line-height: 45px;
 	text-align: center;
 	position: absolute;
-	left: 15px;
+	left: 30px;
 	top: 15px;
 }
 
@@ -1391,6 +1391,7 @@ ol {
 
 .product__discount__item__text h5 a {
 	color: #1c1c1c;
+	text-decoration: none;
 }
 
 .product__discount__item__text .product__item__price {
@@ -1624,6 +1625,7 @@ ol {
 
 .product__item__text h6 a {
 	color: #252525;
+	text-decoration: none;
 }
 
 .product__item__text h5 {

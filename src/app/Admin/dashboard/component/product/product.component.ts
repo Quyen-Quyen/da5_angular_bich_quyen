@@ -15,9 +15,10 @@ export class ProductComponent implements OnInit {
   title = "paginate";
   private subcription: Subscription;
 
-  // fileName = '';
-  postForm: any;
-
+  fileName : any;
+  // postForm: any;
+  imagesTest: any = null;
+  // file: File;
   product: any;
   thumbnail: any;
   category_product: any;
@@ -25,11 +26,13 @@ export class ProductComponent implements OnInit {
   // POSTS: any;
   page: number = 1;
   count: number = 0;
-  tableSize: number = 5;
+  tableSize: number = 8;
   tableSizes: any = [5, 10, 15, 20];
   //end
-  constructor(private admin: AdminService, private sanitizer: DomSanitizer ) { }
+  constructor(private admin: AdminService, private sanitizer: DomSanitizer) { }
   product_fromCreate: FormGroup = new FormGroup({
+    // formData = new FormData(),
+    // formData.append('file',new FormControl(),),
     category_id: new FormControl(),
     name: new FormControl(),
     default_price: new FormControl(),
@@ -37,18 +40,9 @@ export class ProductComponent implements OnInit {
     image: new FormControl(),
     description: new FormControl(),
     amount: new FormControl(),
+
   });
 
-  // selectFile = null;
-  // onFileSelected(event:any) {
-  //   this.selectFile= event.target.files[0];
-  //   console.log(event);
-  // }
-
-  // onupload(){
-  //   this.http.post
-  // }
-  // postForm:any;
 
 
   ngOnInit(): void {
@@ -63,11 +57,7 @@ export class ProductComponent implements OnInit {
       .subscribe((data: any) => {
         console.log(data.product);
         console.log(data.category_product);
-        // CKEDITOR.instances.editor1.document.getBody().getText();
-        // console.log('supplier',data.supplier);
-        // let objectURL = 'data:image/jpeg;base64,' + data.product;
-        // console.log('image',data.product);
-        // this.thumbnail = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+
         this.product = data.product;
         this.category_product = data.category_product;
       }, error => {
@@ -76,29 +66,56 @@ export class ProductComponent implements OnInit {
       }
       )
   }
-  updateImage(ev: any) {
-    const file = ev.target.files[0];
-    // this.postForm.patchValue = file.name;
-    // console.log(this.postForm.path.value);
-    console.log(this.postForm);
-    // this.postForm({
-    //   banner: file
-    // })
-  }
 
+  url = "./assets/image/empty.jpg";
+
+  updateImage(ev: any) {
+    if(ev.target.files)
+    {
+      var reader = new FileReader();
+      reader.readAsDataURL(ev.target.files[0]);
+      reader.onload=(event:any)=>{
+        this.url =event.target.result;
+      }
+    }
+    this.fileName = ev.target.files[0];
+
+    console.log('file name',this.fileName);
+
+  }
   onCreate() {
-    // console.log('dâta',this.product_fromCreate.value);
-    // console.log(this.product_fromCreate.value);
+
+
+
+    const formData : FormData = new FormData();
+    formData.append('image',this.fileName);
+    formData.append('name',this.product_fromCreate.value.name);
+    formData.append('category_id',this.product_fromCreate.value.category_id);
+    formData.append('default_price',this.product_fromCreate.value.default_price);
+    formData.append('price',this.product_fromCreate.value.price);
+    formData.append('description',this.product_fromCreate.value.description);
+    formData.append('amount',this.product_fromCreate.value.amount);
+    // formData.append('file', this.product_fromCreate.get('fileSource')?.value);
+    // console.log('formdata',this.fileName);
+    console.log('data',this.product_fromCreate.value);
+
     // var formData = new FormData();
-    // formData.append('file', this.postForm.value);
-    // console.log(formData);
-    this.admin.create_product(this.product_fromCreate.value).subscribe(data => {
-      console.log('data2', this.product_fromCreate.value);
+    // formData.append('file', this.product_fromCreate.value.image);
+    this.admin.create_product(formData).subscribe((data:any) => {
+    // this.admin.create_product(this.product_fromCreate.value).subscribe((data:any) => {
+      // console.log('data2', formData);
+      console.log('success',data)
 
       this.product_fromCreate.reset();
       this.get_all_product();
-    })
+    }
+    )
   }
+
+
+
+
+
 
   onDelete(id: number) {
     if (confirm("bạn có chắc chắn xóa không ?")) {
