@@ -82,6 +82,7 @@ export class PostsComponent implements OnInit {
     formData.append('title',this.posts_fromCreate.value.title);
     formData.append('staff_id',this.posts_fromCreate.value.staff_id);
     formData.append('content',this.posts_fromCreate.value.content);
+    
     console.log('formData',this.posts_fromCreate.value.type_post_id);
     console.log('title',this.posts_fromCreate.value.title)
     console.log('staff_id',this.posts_fromCreate.value.staff_id)
