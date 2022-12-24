@@ -1,11 +1,20 @@
 
 <div class="row my-3 bg-white" style="margin-left: 0px; margin-right: 0px;">
-  <h3 class="fs-4 mb-3">Quản lý bài viết</h3>
+  <h3 class="fs-4 mb-3">Quản lý vận chuyển</h3>
 <div class="col ">
 
-  <button type="button" class="btn btn-primary mb-3 " style="float: right;" data-bs-toggle="modal" data-bs-target="#add">
-    Thêm mới
-</button>
+  <div class="row">
+    <div class="col-5">
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+        placeholder="&#61442; Tìm kiếm đơn vận chuyển">
+        </div>
+      <div class="col-7">
+        <button type="button" class="btn btn-success mt-2 " style="float: right;" data-bs-toggle="modal"
+          data-bs-target="#add">
+          Thêm mới
+        </button>
+      </div>
+    </div>
 
 <table class="table table-striped rounded shadow-sm  bg-white ">
   <!-- <table class="table   table-hover"> -->
@@ -19,7 +28,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let trans of transport| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
+    <tr *ngFor="let trans of transport|filter:searchText| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
       <td>{{i+1}}</td>
       <td>{{trans.staff_id}}</td>
       <td>{{trans.status_oder}}</td>

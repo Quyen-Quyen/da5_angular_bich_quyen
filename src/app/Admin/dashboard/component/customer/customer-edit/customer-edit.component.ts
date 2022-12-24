@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -12,6 +12,8 @@ export class CustomerEditComponent implements OnInit {
 
   id: number = 0;
   constructor(private admin : AdminService ,private _router: ActivatedRoute , private router :Router) { }
+  submitted:boolean = false;
+
   customer_fromEdit: FormGroup = new FormGroup({
     name : new FormControl(),
     id_user: new FormControl(),
@@ -26,17 +28,21 @@ export class CustomerEditComponent implements OnInit {
     this.admin.get_customer(this.id).subscribe(data => {
       console.log(data)
       this.customer_fromEdit = new FormGroup({
-        name: new FormControl(data.name),
-        id_user: new FormControl(data.id_user),
-        date_of_birth: new FormControl(data.date_of_birth),
-        sex: new FormControl(data.sex),
-        email: new FormControl(data.email),
-        adress: new FormControl(data.adress),
-        number_phone: new FormControl(data.number_phone),
+        name: new FormControl(data.name,Validators.required),
+        id_user: new FormControl(data.id_user,Validators.required),
+        date_of_birth: new FormControl(data.date_of_birth,Validators.required),
+        sex: new FormControl(data.sex,Validators.required),
+        email: new FormControl(data.email,Validators.email),
+        adress: new FormControl(data.adress,Validators.required),
+        number_phone: new FormControl(data.number_phone,[Validators.min(100000000),Validators.max(10000000000)]),
       });
     })
   }
+  get f(){
+    return this.customer_fromEdit.controls;
+  }
   onEdit() {
+    this.submitted=true;
     this.admin.update_customer(this.id, this.customer_fromEdit.value).subscribe(data => {
       this.router.navigate(['admin/customer']);
       

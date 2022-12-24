@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -10,6 +10,8 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class VideoComponent implements OnInit {
   private subcription: Subscription;
+  searchText:any;
+  customer :any;
   video: any;
   type_video: any;
   video_all: any;
@@ -21,11 +23,12 @@ export class VideoComponent implements OnInit {
   tableSizes: any = [5, 10, 15, 20];
   //end
   constructor(private admin: AdminService) { }
+  submitted:boolean = false;
   video_fromCreate: FormGroup = new FormGroup({
-    title: new FormControl(),
-    type_video_id: new FormControl(),
-    video: new FormControl(),
-    description: new FormControl(),
+    title: new FormControl('',Validators.required),
+    type_video_id: new FormControl('',Validators.required),
+    video: new FormControl('',Validators.required),
+    description: new FormControl('',Validators.required),
 
   });
 
@@ -48,7 +51,12 @@ export class VideoComponent implements OnInit {
       }
       )
   }
+  get f(){
+    return this.video_fromCreate.controls;
+  }
   onCreate() {
+    this.submitted=true;
+
     this.admin.create_video(this.video_fromCreate.value).subscribe(data => {
       this.video_fromCreate.reset();
       console.log(data);

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
@@ -14,10 +14,10 @@ import { AdminService } from 'src/app/service/admin.service';
 export class ProductComponent implements OnInit {
   title = "paginate";
   private subcription: Subscription;
-
+  searchText:any;
+  customer :any;
   fileName : any;
   // postForm: any;
-  imagesTest: any = null;
   // file: File;
   product: any;
   thumbnail: any;
@@ -30,16 +30,17 @@ export class ProductComponent implements OnInit {
   tableSizes: any = [5, 10, 15, 20];
   //end
   constructor(private admin: AdminService, private sanitizer: DomSanitizer) { }
+  submitted:boolean = false;
   product_fromCreate: FormGroup = new FormGroup({
     // formData = new FormData(),
     // formData.append('file',new FormControl(),),
-    category_id: new FormControl(),
-    name: new FormControl(),
-    default_price: new FormControl(),
-    price: new FormControl(),
-    image: new FormControl(),
-    description: new FormControl(),
-    amount: new FormControl(),
+    category_id: new FormControl('',Validators.required),
+    name: new FormControl('',Validators.required),
+    default_price: new FormControl('',Validators.required),
+    price: new FormControl('',Validators.required),
+    image: new FormControl('',Validators.required),
+    description: new FormControl('',Validators.required),
+    amount: new FormControl('',Validators.required),
 
   });
 
@@ -83,10 +84,13 @@ export class ProductComponent implements OnInit {
     console.log('file name',this.fileName);
 
   }
+  get f(){
+    return this.product_fromCreate.controls;
+  }
   onCreate() {
 
 
-
+    this.submitted=true;
     const formData : FormData = new FormData();
     formData.append('image',this.fileName);
     formData.append('name',this.product_fromCreate.value.name);
@@ -95,15 +99,12 @@ export class ProductComponent implements OnInit {
     formData.append('price',this.product_fromCreate.value.price);
     formData.append('description',this.product_fromCreate.value.description);
     formData.append('amount',this.product_fromCreate.value.amount);
-    // formData.append('file', this.product_fromCreate.get('fileSource')?.value);
-    // console.log('formdata',this.fileName);
+
     console.log('data',this.product_fromCreate.value);
 
-    // var formData = new FormData();
-    // formData.append('file', this.product_fromCreate.value.image);
+
     this.admin.create_product(formData).subscribe((data:any) => {
-    // this.admin.create_product(this.product_fromCreate.value).subscribe((data:any) => {
-      // console.log('data2', formData);
+ ;
       console.log('success',data)
 
       this.product_fromCreate.reset();

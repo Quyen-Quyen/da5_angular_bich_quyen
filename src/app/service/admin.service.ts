@@ -21,6 +21,11 @@ export class AdminService {
   login(data: any): Observable<any> {
     return this._httpClient.post<any>(this.API_URL + 'login', data);
   }
+  
+
+  register(data:any): Observable<any> {
+    return this._httpClient.post<any>(this.API_URL + 'register',data);
+  }
   getalluser(): Observable<any> {
     return this._httpClient.get<any>(this.API_URL + 'user/', {
       headers: {
@@ -442,7 +447,8 @@ export class AdminService {
   update_product(id: number, data: any): Observable<any> {
     return this._httpClient.put<any>(this.API_URL + 'product/' + id, data, {
       headers: {
-        Authorization: this.code_tokens
+        Authorization: this.code_tokens,
+        // 'Content-Type': 'application/json'
       }
     });
   }

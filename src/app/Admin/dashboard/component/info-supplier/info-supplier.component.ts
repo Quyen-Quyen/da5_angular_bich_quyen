@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -10,6 +10,8 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class InfoSupplierComponent implements OnInit {
   private subscription: Subscription;
+  searchText:any;
+  customer :any;
   info_supplier :any;
       //phân trang
   // POSTS: any;
@@ -19,12 +21,13 @@ export class InfoSupplierComponent implements OnInit {
   tableSizes: any = [5, 10, 15, 20];
   //end
   constructor(private admin: AdminService ) { }
+  submitted:boolean = false;
   info_supplier_fromCreate: FormGroup = new FormGroup({
-    name : new FormControl(),
-    email: new FormControl(),
-    adress: new FormControl(),
-    number_phone: new FormControl(),
-    sectors: new FormControl(),
+    name : new FormControl('',Validators.required),
+    email: new FormControl('',Validators.email),
+    adress: new FormControl('',Validators.required),
+    number_phone: new FormControl('',[Validators.min(100000000),Validators.max(10000000000)]),
+    sectors: new FormControl('',Validators.required),
   });
 
   
@@ -49,7 +52,11 @@ export class InfoSupplierComponent implements OnInit {
     })
   }
   }
+  get f(){
+    return this.info_supplier_fromCreate.controls;
+  }
   onCreate(){
+    this.submitted=true;
     this.subscription = this.admin.create_info_supplier(this.info_supplier_fromCreate.value).subscribe((data)=>{
       console.log(data);
       this.info_supplier_fromCreate.reset();

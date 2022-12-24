@@ -14,16 +14,20 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { SanitizeHtmlPipe } from './share/pipe/sanitize-html.pipe';
 // import { SanitizeHtmlPipe } from './share/pipe/sanitize-html.pipe';
+import { LogoutComponent } from './logout/logout.component';
+import { RegisterComponent } from './register/register.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
-  declarations: [
+  declarations: [		
     AppComponent,
     TestppComponent,
     LoginComponent,
     // FileUploadComponent,
     // SanitizeHtmlPipe,
-
-  ],
+      LogoutComponent,
+      RegisterComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,6 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CKEditorModule,
     CarouselModule,
     BrowserAnimationsModule,
+    Ng2SearchPipeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 // import { category_product } from 'src/app/models/admin';
 import { AdminService } from 'src/app/service/admin.service';
@@ -12,6 +12,8 @@ import { AdminService } from 'src/app/service/admin.service';
 export class CategoryProductComponent implements OnInit {
 
   private subcription : Subscription;
+  searchText:any;
+  customer :any;
   category_product: any;
   supplier:any;
     //phân trang
@@ -22,12 +24,11 @@ export class CategoryProductComponent implements OnInit {
   tableSizes: any = [5, 10, 15, 20];
   //end
   constructor(private admin : AdminService) { }
+  submitted:boolean = false;
   category_product_fromCreate: FormGroup = new FormGroup({
     // id: new FormControl(),
-    name: new FormControl(),
-    product_supplier_id: new FormControl(),
-    warehouse_id: new FormControl(),
-    // status: new FormControl()
+    name: new FormControl('',Validators.required),
+    product_supplier_id: new FormControl('',Validators.required),
 });
 
   ngOnInit(): void {
@@ -47,7 +48,11 @@ export class CategoryProductComponent implements OnInit {
     }
     )
   }
+  get f(){
+    return this.category_product_fromCreate.controls;
+  }
   onCreate(){
+    this.submitted=true;
     this.admin.create_category_product(this.category_product_fromCreate.value).subscribe(data=>{ 
       this.category_product_fromCreate.reset();
       console.log(data);

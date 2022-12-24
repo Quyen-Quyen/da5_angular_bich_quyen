@@ -10,6 +10,8 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class CustomerComponent implements OnInit {
   private subscription: Subscription;
+  // title = 'Angular Search Using ng2-search-filter';
+  searchText:any;
   customer :any;
       //phân trang
   // POSTS: any;
@@ -27,7 +29,7 @@ export class CustomerComponent implements OnInit {
     sex: new FormControl('',Validators.required),
     email: new FormControl('',Validators.email),
     adress: new FormControl('',Validators.required),
-    number_phone: new FormControl('',Validators.required)
+    number_phone: new FormControl('',[Validators.min(100000000),Validators.max(10000000000)])
   });
 
   ngOnInit() {
@@ -60,6 +62,7 @@ export class CustomerComponent implements OnInit {
     this.submitted=true;
     this.subscription = this.admin.create_customer(this.customer_fromCreate.value).subscribe((data)=>{
       this.customer_fromCreate.reset();
+      alert("Thêm thành công");
       console.log(data);
       this.getall_customer();
     })

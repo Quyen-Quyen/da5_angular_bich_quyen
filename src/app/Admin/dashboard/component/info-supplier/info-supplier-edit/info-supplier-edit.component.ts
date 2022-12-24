@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -10,6 +10,7 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class InfoSupplierEditComponent implements OnInit {
   id: number = 0;
+  submitted:boolean = false;
   constructor(private admin : AdminService ,private _router: ActivatedRoute , private router :Router) { }
   info_supplier_fromEdit: FormGroup = new FormGroup({
     name : new FormControl(),
@@ -24,15 +25,19 @@ export class InfoSupplierEditComponent implements OnInit {
     this.admin.get_info_supplier(this.id).subscribe(data => {
       console.log(data)
       this.info_supplier_fromEdit = new FormGroup({
-        name: new FormControl(data.name),
-        email: new FormControl(data.email),
-        adress: new FormControl(data.adress),
-        number_phone: new FormControl(data.number_phone),
-        sectors: new FormControl(data.sectors),
+        name: new FormControl(data.name,Validators.required),
+        email: new FormControl(data.email,Validators.email),
+        adress: new FormControl(data.adress,Validators.required),
+        number_phone: new FormControl(data.number_phone,[Validators.min(100000000),Validators.max(10000000000)]),
+        sectors: new FormControl(data.sectors,Validators.required),
       });
     })
   }
+  get f(){
+    return this.info_supplier_fromEdit.controls;
+  }
   onEdit() {
+    this.submitted=true;
     this.admin.update_info_supplier(this.id, this.info_supplier_fromEdit.value).subscribe(data => {
       this.router.navigate(['admin/info-supplier']);
       

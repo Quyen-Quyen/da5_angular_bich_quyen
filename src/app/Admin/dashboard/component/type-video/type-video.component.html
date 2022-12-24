@@ -1,10 +1,19 @@
 <div class="row my-3 bg-white" style="margin-left: 0px; margin-right: 0px;">
-<h3 class="fs-4 mb-3">Quản lý bài viết</h3>
+<h3 class="fs-4 mb-3">Quản lý loại video</h3>
 <div class="col ">
 
-  <button type="button" class="btn btn-primary mb-3 " style="float: right;" data-bs-toggle="modal" data-bs-target="#add">
-    Thêm mới
-</button>
+  <div class="row">
+    <div class="col-5">
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+        placeholder="&#61442; Tìm kiếm loại video">
+        </div>
+      <div class="col-7">
+        <button type="button" class="btn btn-success mt-2 " style="float: right;" data-bs-toggle="modal"
+          data-bs-target="#add">
+          Thêm mới
+        </button>
+      </div>
+    </div>
 
 <table class="table table-striped rounded shadow-sm  bg-white ">
   <!-- <table class="table   table-hover"> -->
@@ -16,7 +25,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let type of type_video| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
+    <tr *ngFor="let type of type_video|filter:searchText| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
       <td>{{i+1}}</td>
       <td>{{type.name}}</td>
       <td>
@@ -38,7 +47,7 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <form action="" method="POST" [formGroup]="type_video_fromCreate" (ngSubmit)="onCreate()">
-        <div class="modal-header">
+        <div class="modal-header bg-success text-white">
           <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -47,6 +56,10 @@
           <div class="form-group">
             <label for="">Thể loại video</label>
             <input type="text" formControlName="name" class="form-control" placeholder="Thể loại video">
+            <div *ngIf="submitted && f.name.errors">
+              <span style="color: #993300; font-size: 14px;" *ngIf="f.name.errors.required">--Tên khách hành không
+                được để trống--</span>
+            </div>
           </div>
           
         </div>

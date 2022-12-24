@@ -11,6 +11,7 @@ import { AdminService } from 'src/app/service/admin.service';
 export class ProductEditComponent implements OnInit {
 
   id: number = 0;
+  fileName : any;
   product :any;
   constructor(private admin : AdminService ,private _router: ActivatedRoute , private router :Router) { }
   product_fromEdit: FormGroup = new FormGroup({
@@ -24,8 +25,8 @@ export class ProductEditComponent implements OnInit {
   ngOnInit() {
     this.id = this._router.snapshot.params['id'];
     this.admin.get_product(this.id).subscribe(data => {
-      console.log(data)
-      this.product=data;
+      console.log('data',data)
+      this.url=data.img_src;
       this.product_fromEdit = new FormGroup({
         category_id: new FormControl(data.category_id),
         name: new FormControl(data.name),
@@ -37,8 +38,40 @@ export class ProductEditComponent implements OnInit {
       console.log(this.product_fromEdit);
     })
   }
+  url = "./assets/image/empty.jpg";
+
+  updateImage(ev: any) {
+    if(ev.target.files)
+    {
+      var reader = new FileReader();
+      reader.readAsDataURL(ev.target.files[0]);
+      reader.onload=(event:any)=>{
+        this.url =event.target.result;
+      }
+    }
+    this.fileName = ev.target.files[0];
+
+    console.log('file name',this.fileName);
+
+  }
+
+
   onEdit() {
-    this.admin.update_product(this.id, this.product_fromEdit.value).subscribe(data => {
+    // console.log(this.product_fromEdit.value);
+    // const formData : FormData = new FormData();
+    // formData.append('image',this.fileName);
+    // console.log('ảnh',this.fileName)
+    // formData.append('name',this.product_fromEdit.value.name);
+    // formData.append('category_id',this.product_fromEdit.value.category_id);
+    // formData.append('default_price',this.product_fromEdit.value.default_price);
+    // formData.append('price',this.product_fromEdit.value.price);
+    // formData.append('description',this.product_fromEdit.value.description);
+    // formData.append('amount',this.product_fromEdit.value.amount);
+
+    // console.log('name',this.product_fromEdit.value.name)
+
+    this.admin.update_product(this.id,this.product_fromEdit.value).subscribe((data:any) => {
+      console.log('data update',data);
       this.router.navigate(['admin/product']);
       
     });

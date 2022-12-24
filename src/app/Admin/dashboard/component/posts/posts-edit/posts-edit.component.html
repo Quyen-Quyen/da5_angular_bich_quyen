@@ -17,11 +17,20 @@
 
     <input type="text" formControlName="staff_id" class="form-control" placeholder="Người viết" readonly>
   </div>
+  
   <div class="form-group">
     <label for="">Nội dung</label>
-    <!-- <input type="text" formControlName="content" class="form-control" placeholder="Nội dung"> -->
     <ckeditor formControlName="content"></ckeditor>
   </div>
+  <!-- <div class="form-group">
+    <label for="">Ảnh tiêu đề bài viết </label>
+    <img src="{{ url }}"   height="200" width="200" alt=""><br>
+    <input type="file" formControlName="image" (change)="updateImage($event)">
+    <div *ngIf="submitted && f.image.errors">
+      <span style="color: #993300; font-size: 14px;" *ngIf="f.image.errors.required">-- Chưa chọn ảnh
+        --</span>
+    </div>
+  </div> -->
   <br>
   <div style="text-align: center;">
     

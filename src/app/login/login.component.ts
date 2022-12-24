@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.apiService.login(this.form.value)
     .subscribe(data=>{
        console.log(data);
-      this.router.navigate(['/']);
+      this.router.navigate(['']);
     });
   }
 

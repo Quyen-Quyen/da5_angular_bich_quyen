@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -10,6 +10,8 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class TransportComponent implements OnInit {
   private subcription : Subscription;
+  searchText:any;
+  customer :any;
   transport: any;
       //phân trang
   // POSTS: any;
@@ -19,10 +21,11 @@ export class TransportComponent implements OnInit {
   tableSizes: any = [5, 10, 15, 20];
   //end
   constructor(private admin : AdminService) { }
+  submitted:boolean = false;
   transport_fromCreate: FormGroup = new FormGroup({
-    staff_id: new FormControl(),
-    status_oder: new FormControl(),
-    intend_time: new FormControl(),
+    staff_id: new FormControl('',Validators.required),
+    status_oder: new FormControl('',Validators.required),
+    intend_time: new FormControl('',Validators.required),
 });
 
   ngOnInit(): void {
@@ -40,7 +43,11 @@ export class TransportComponent implements OnInit {
     }
     )
   }
+  get f(){
+    return this.transport_fromCreate.controls;
+  }
   onCreate(){
+    this.submitted=true;
     this.admin.create_transport(this.transport_fromCreate.value).subscribe(data=>{ 
       this.transport_fromCreate.reset();
       console.log(data);

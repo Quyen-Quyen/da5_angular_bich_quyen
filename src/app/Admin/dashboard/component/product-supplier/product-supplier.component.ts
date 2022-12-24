@@ -10,6 +10,8 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class ProductSupplierComponent implements OnInit {
   private subcription : Subscription;
+  searchText:any;
+  customer :any;
   product_supplier: any;
   constructor(private admin : AdminService) { }
   product_supplier_fromCreate: FormGroup = new FormGroup({

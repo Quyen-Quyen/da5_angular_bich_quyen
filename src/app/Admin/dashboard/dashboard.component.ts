@@ -18,7 +18,8 @@ export class DashboardComponent implements OnInit {
   }
   getuser() {
     this.subscription = this.admin.getalluser().subscribe((data:any)=>{
-      console.log(data.name);
+      console.log('ddaay',data.name);
+      // console.log('tài khoản',data);
       this.users=data.name;
     })
   }

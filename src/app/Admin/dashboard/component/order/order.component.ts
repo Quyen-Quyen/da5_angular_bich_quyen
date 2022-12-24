@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -11,6 +11,8 @@ import { AdminService } from 'src/app/service/admin.service';
 export class OrderComponent implements OnInit {
 
   private subcription : Subscription;
+  searchText:any;
+  customer :any;
   order: any;
       //phân trang
   // POSTS: any;
@@ -19,12 +21,15 @@ export class OrderComponent implements OnInit {
   tableSize: number = 8;
   tableSizes: any = [5, 10, 15, 20];
   //end
+
+  
   constructor(private admin : AdminService) { }
+  submitted:boolean = false;
   order_fromCreate: FormGroup = new FormGroup({
     // id: new FormControl(),
-    product_id: new FormControl(),
-    customer_id: new FormControl(),
-    warehouse_id: new FormControl(),
+    product_id: new FormControl('',Validators.required),
+    customer_id: new FormControl('',Validators.required),
+    warehouse_id: new FormControl('',Validators.required),
     // status: new FormControl()
 
 });
@@ -44,7 +49,11 @@ export class OrderComponent implements OnInit {
     }
     )
   }
+  get f(){
+    return this.order_fromCreate.controls;
+  }
   onCreate(){
+    this.submitted=true;
     this.admin.create_order(this.order_fromCreate.value).subscribe(data=>{ 
       this.order_fromCreate.reset();
       console.log(data);

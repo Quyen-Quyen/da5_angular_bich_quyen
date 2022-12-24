@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -11,6 +11,8 @@ import { AdminService } from 'src/app/service/admin.service';
 export class TypePostsComponent implements OnInit {
 
   private subcription : Subscription;
+  searchText:any;
+  customer :any;
   type_post: any;
       //phân trang
   // POSTS: any;
@@ -20,8 +22,9 @@ export class TypePostsComponent implements OnInit {
   tableSizes: any = [5, 10, 15, 20];
   //end
   constructor(private admin : AdminService) { }
+  submitted:boolean = false;
   type_post_fromCreate: FormGroup = new FormGroup({
-    name: new FormControl(),
+    name: new FormControl('',Validators.required),
 
 });
 
@@ -40,7 +43,12 @@ export class TypePostsComponent implements OnInit {
     }
     )
   }
+  get f(){
+    return this.type_post_fromCreate.controls;
+  }
   onCreate(){
+    this.submitted=true;
+
     this.admin.create_type_posts(this.type_post_fromCreate.value).subscribe(data=>{ 
       this.type_post_fromCreate.reset();
       console.log(data);

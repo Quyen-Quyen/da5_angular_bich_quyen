@@ -2,9 +2,18 @@
   <h3 class="fs-4 mb-3">Quản lý đơn hàng</h3>
 <div class="col ">
 
-  <button type="button" class="btn btn-primary mb-3 " style="float: right;" data-bs-toggle="modal" data-bs-target="#add">
-    Thêm mới
-</button>
+  <div class="row">
+    <div class="col-5">
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+        placeholder="&#61442; Tìm kiếm đơn hàng">
+        </div>
+      <div class="col-7">
+        <button type="button" class="btn btn-success mt-2 " style="float: right;" data-bs-toggle="modal"
+          data-bs-target="#add">
+          Thêm mới
+        </button>
+      </div>
+    </div>
 
 <table class="table table-striped rounded shadow-sm  bg-white ">
     <thead>
@@ -12,12 +21,12 @@
         <td scope="col" width="50" >#</td>
         <td>Tên sản phẩm</td>
         <td>Tên khách hàng</td>
-        <td >Tên kho</td>
+        <td >Mã kho</td>
         <td >Chức năng</td>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let or of order| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
+    <tr *ngFor="let or of order|filter:searchText| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
       <td>{{i+1}}</td>
       <td>{{or.product_id}}</td>
       <td>{{or.customer_id}}</td>

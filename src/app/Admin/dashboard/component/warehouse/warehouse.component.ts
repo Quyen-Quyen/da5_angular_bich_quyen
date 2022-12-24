@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -19,11 +19,12 @@ export class WarehouseComponent implements OnInit {
   tableSizes: any = [5, 10, 15, 20];
   //end
   constructor(private admin : AdminService) { }
+  submitted:boolean = false;
   warehouse_fromCreate: FormGroup = new FormGroup({
     // id: new FormControl(),
-    product_supplier_id: new FormControl(),
-    product_id: new FormControl(),
-    amount: new FormControl(),
+    product_supplier_id: new FormControl('',Validators.required),
+    product_id: new FormControl('',Validators.required),
+    amount: new FormControl('',Validators.required),
     // status: new FormControl()
     
 });
@@ -43,7 +44,12 @@ export class WarehouseComponent implements OnInit {
     }
     )
   }
+  get f(){
+    return this.warehouse_fromCreate.controls;
+  }
   onCreate(){
+    this.submitted=true;
+
     this.admin.create_warehouse(this.warehouse_fromCreate.value).subscribe(data=>{ 
       this.warehouse_fromCreate.reset();
       console.log(data);

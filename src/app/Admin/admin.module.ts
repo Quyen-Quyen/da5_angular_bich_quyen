@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TestapiComponent } from './dashboard/testapi/testapi.component';
 import { CategoryProductComponent } from './dashboard/component/category-product/category-product.component';
 import { IsAuthenticatedGuard } from '../is-authenticated.guard';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TestapiEditComponent } from './dashboard/testapi/testapi-edit/testapi-edit.component';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { CategoryProductEditComponent } from './dashboard/component/category-product/category-product-edit/category-product-edit.component';
@@ -42,6 +42,7 @@ import { DashboardAdminComponent } from './dashboard/component/dashboard-admin/d
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedMessengerModule } from '../shared-messenger/shared-messenger.module';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 const routes: Routes = [
@@ -271,6 +272,8 @@ const routes: Routes = [
     NgxPaginationModule,
     HttpClientModule,
     SharedMessengerModule,
+    Ng2SearchPipeModule,
+    FormsModule,
     RouterModule.forChild(routes) // sử dụng để tạo vùng admin
   ]
 })
