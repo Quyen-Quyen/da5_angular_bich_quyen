@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
-
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
@@ -10,6 +10,7 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class CustomerComponent implements OnInit {
   private subscription: Subscription;
+  fileName= 'Danh_sach_khach_hang.xlsx';
   // title = 'Angular Search Using ng2-search-filter';
   searchText:any;
   customer :any;
@@ -76,5 +77,23 @@ export class CustomerComponent implements OnInit {
         this.tableSize = event.target.value;
         this.page = 1;
         this.getall_customer();
+      }
+
+
+      // export excel
+      exportexcel(): void
+      {
+        /* chuyển vào đây id bảng */
+        let element = document.getElementById('excel-table');
+        const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+     
+        /* tạo sổ làm việc và thêm trang tính */
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+     
+        /* save to file */  
+        XLSX.writeFile(wb, this.fileName);
+
+     
       }
 }

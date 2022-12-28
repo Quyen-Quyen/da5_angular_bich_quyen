@@ -78,4 +78,6 @@ export class CategoryProductComponent implements OnInit {
       this.get_all_category_product();
     }
 
+    
+
 }

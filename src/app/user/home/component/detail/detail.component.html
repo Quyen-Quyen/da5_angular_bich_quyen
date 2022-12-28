@@ -1,10 +1,11 @@
 <section class="product-details spad">
   <div class="container">
-      <div class="row" >
+      <!-- <div class="row"  *ngFor="let item of product_detail"> -->
+      <div class="row"  >
           <div class="col-lg-6 col-md-6">
               <div class="product__details__pic">
                   <div class="product__details__pic__item">
-                      <img [src]="detail_img_src"  class="product__details__pic__item--large"
+                      <img [src]="detail_img_src "   class="product__details__pic__item--large"
                       alt="">
                   </div>
                   <!-- <div class="product__details__pic__slider owl-carousel">
@@ -39,7 +40,8 @@
                           </div>
                       </div>
                   </div>
-                  <a href="#" class="primary-btn">ADD TO CARD</a>
+                  <button class="primary-btn" (click)="addToCart(product_detail)">ADD TO CARD</button>
+                  <!-- <a >ADD TO CARD</a> -->
                   <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                   <ul>
                       <li><b>Availability</b> <span>In Stock</span></li>

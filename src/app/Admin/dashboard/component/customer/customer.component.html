@@ -6,7 +6,12 @@
         <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
           placeholder="&#61442; Tìm kiếm khách hàng">
           </div>
-        <div class="col-7">
+          <div class="col-6">
+            <button class="btn btn-dark mt-2 "  style="float: right;" (click)="exportexcel()">Xuất excel</button>
+
+          </div>
+
+        <div class="col-1">
           <button type="button" class="btn btn-success mt-2 " style="float: right;" data-bs-toggle="modal"
             data-bs-target="#add">
             Thêm mới
@@ -15,7 +20,7 @@
       </div>
     <!-- </div> -->
 
-    <table class="table table-striped rounded shadow-sm  bg-white ">
+    <table class="table table-striped rounded shadow-sm  bg-white " id="excel-table">
       <!-- <table class="table   table-hover"> -->
       <thead>
         <tr>

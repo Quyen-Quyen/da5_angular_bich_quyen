@@ -1,4 +1,3 @@
-
 <div class="row my-3 bg-white" style="margin-left: 0px; margin-right: 0px;">
   <h3 class="fs-4 mb-3">Quản lý sản phẩm</h3>
   <div class="col ">
@@ -6,22 +5,27 @@
       <div class="col-5">
         <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
           placeholder="&#61442; Tìm kiếm sản phẩm">
-          </div>
-        <div class="col-7">
-          <button type="button" class="btn btn-success mt-2 " style="float: right;" data-bs-toggle="modal"
-            data-bs-target="#add">
-            Thêm mới
-          </button>
-        </div>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-dark mt-2 " style="float: right;" (click)="exportexcel()">Xuất excel</button>
+
       </div>
 
-    <table class="table  rounded shadow-sm  bg-white ">
+      <div class="col-1">
+        <button type="button" class="btn btn-success mt-2 " style="float: right;" data-bs-toggle="modal"
+          data-bs-target="#add">
+          Thêm mới
+        </button>
+      </div>
+    </div>
+
+    <table class="table  rounded shadow-sm  bg-white " id="excel-table">
       <!-- <table class="table   table-hover"> -->
       <thead>
         <tr>
           <td scope="col" width="50">#</td>
           <td>Loại sản phẩm</td>
-          <td>Tên sản phẩm</td> 
+          <td>Tên sản phẩm</td>
           <td>Giá ban đầu</td>
           <td>Giá hiện tại</td>
           <td>Số lượng</td>
@@ -31,9 +35,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let pro of product |filter:searchText| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index" >
+        <tr
+          *ngFor="let pro of product |filter:searchText| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
 
-    <!-- <br> -->
+          <!-- <br> -->
           <td>{{i+1}}</td>
           <td>{{pro.name_cate}}</td>
           <td>{{pro.name}}</td>
@@ -43,7 +48,7 @@
           <!-- <td>{{pro.image}}</td> -->
           <img src="{{ pro.img_src }}" alt="" style="width: 80px; height: 80px">
           <!-- <td>{{pro.description|sanitizeHtml  }}</td> -->
-          <td  [innerHTML]="pro.description | sanitizeHtml"></td>
+          <td [innerHTML]="pro.description | sanitizeHtml"></td>
           <td>
 
 
@@ -61,9 +66,8 @@
     </div>
 
     <!-- Modal thêm mới -->
-    <div class="modal fade" id="add" tabindex="-1"
-      aria-labelledby="exampleModalLabel" aria-hidden="true"  >
-      <div class="modal-dialog modal-xl"style="max-width:1500px !important" >
+    <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl" style="max-width:1500px !important">
         <div class="modal-content" style=" background-color: gainsboro">
           <form action="" method="POST" [formGroup]="product_fromCreate" (ngSubmit)="onCreate()">
             <div class="modal-header bg-success text-white">
@@ -82,16 +86,18 @@
                     </select>
                   </div>
                   <div *ngIf="submitted && f.category_id.errors">
-                    <span style="color: #993300; font-size: 14px;" *ngIf="f.category_id.errors.required">--fen chưa chọn loại sản phẩm--</span>
+                    <span style="color: #993300; font-size: 14px;" *ngIf="f.category_id.errors.required">--fen chưa chọn
+                      loại sản phẩm--</span>
                   </div>
                 </div>
                 <div class="col">
                   <label for="">Tên sản phẩm<span style="color: red;">*</span></label>
                   <input style="border-radius: 20px" type="text" formControlName="name" class="form-control"
                     placeholder="Tên sản phẩm">
-                    <div *ngIf="submitted && f.name.errors">
-                      <span style="color: #993300; font-size: 14px;" *ngIf="f.name.errors.required">--Tên sản phẩm không được để trống--</span>
-                    </div>
+                  <div *ngIf="submitted && f.name.errors">
+                    <span style="color: #993300; font-size: 14px;" *ngIf="f.name.errors.required">--Tên sản phẩm không
+                      được để trống--</span>
+                  </div>
                 </div>
 
               </div>
@@ -101,43 +107,50 @@
                   <div class="form-group">
                     <label for="">Giá ban đầu<span style="color: red;">*</span></label>
 
-                    <input type="number" style="border-radius: 20px"  formControlName="default_price" class="form-control" placeholder="Giá ban đầu">
+                    <input type="number" style="border-radius: 20px" formControlName="default_price"
+                      class="form-control" placeholder="Giá ban đầu">
                   </div>
                   <div *ngIf="submitted && f.default_price.errors">
-                    <span style="color: #993300; font-size: 14px;" *ngIf="f.default_price.errors.required">--Giá tiền không được để trống--</span>
+                    <span style="color: #993300; font-size: 14px;" *ngIf="f.default_price.errors.required">--Giá tiền
+                      không được để trống--</span>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
                     <label for="">Giá hiện tại</label>
-                    <input type="number" style="border-radius: 20px"  formControlName="price" class="form-control" placeholder="Giá hiện tại">
+                    <input type="number" style="border-radius: 20px" formControlName="price" class="form-control"
+                      placeholder="Giá hiện tại">
                   </div>
                   <div *ngIf="submitted && f.price.errors">
-                    <span style="color: #993300; font-size: 14px;" *ngIf="f.price.errors.required">--Giá tiền không được để trống--</span>
+                    <span style="color: #993300; font-size: 14px;" *ngIf="f.price.errors.required">--Giá tiền không được
+                      để trống--</span>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-              <div class="form-group">
-                <label for="">Ảnh demo</label>
-                <img [src]="url"  height="200" width="200" alt=""><br>
-                <input type="file"  formControlName="image" (change)="updateImage($event)" >
-                <div *ngIf="submitted && f.image.errors">
-                  <span style="color: #993300; font-size: 14px;" *ngIf="f.image.errors.required">--Bạn chưa chọn ảnh kìa--</span>
-                </div>
+                  <div class="form-group">
+                    <label for="">Ảnh demo</label>
+                    <img [src]="url" height="200" width="200" alt=""><br>
+                    <input type="file" formControlName="image" (change)="updateImage($event)">
+                    <div *ngIf="submitted && f.image.errors">
+                      <span style="color: #993300; font-size: 14px;" *ngIf="f.image.errors.required">--Bạn chưa chọn ảnh
+                        kìa--</span>
+                    </div>
 
-              </div>
-              </div>
-              <div class="col">
-              <div class="form-group">
-                <label for="">Số lượng</label>
-                <input type="number" style="border-radius: 20px"  formControlName="amount" class="form-control" placeholder="Nhập số lượng">
-                <div *ngIf="submitted && f.amount.errors">
-                  <span style="color: #993300; font-size: 14px;" *ngIf="f.amount.errors.required">--Quên nhập số lượng rồi bạn ây--</span>
+                  </div>
                 </div>
-              </div>
-              </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="">Số lượng</label>
+                    <input type="number" style="border-radius: 20px" formControlName="amount" class="form-control"
+                      placeholder="Nhập số lượng">
+                    <div *ngIf="submitted && f.amount.errors">
+                      <span style="color: #993300; font-size: 14px;" *ngIf="f.amount.errors.required">--Quên nhập số
+                        lượng rồi bạn ây--</span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="">mô tả sản phẩm</label>

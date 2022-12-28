@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './home/component/index/index.component';
@@ -91,6 +91,7 @@ const router_home:Routes=[
     NgxPaginationModule,
     RouterModule.forChild(router_home),
     CarouselModule
-  ]
+  ],
+  providers:    [ CurrencyPipe ]
 })
 export class UserModule { }
