@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/cart_Service/cart.service';
+import { IndexComponent } from '../component/index/index.component';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +13,16 @@ export class HeaderComponent implements OnInit {
   constructor(private cartService:CartService) { }
 
   ngOnInit() {
-    // this.cartService.get_product.subscribe((data:any)=>{
+    // this.cartService.loadCart.subscribe((data:any)=>{
     //   this.itemIncart = data.length;
     //   console.log('quality cart',this.itemIncart)
     // })
+    this.cartService.loadCart();
+    // this.items = this.cartService.getItems();
+    this.itemIncart=this.cartService.getItems().length;
+    // console.log('nên pie',this.itemIncart)
+    // this.index.getall_categories_section_begin();
+    // this.cartService.saveCart();
   }
 
 }

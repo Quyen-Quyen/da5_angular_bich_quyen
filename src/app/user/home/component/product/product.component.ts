@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CartService } from 'src/app/cart_Service/cart.service';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
@@ -31,7 +32,7 @@ export class ProductComponent implements OnInit {
   tableSizes: any = [5, 10, 15, 20];
   //end
 
-  constructor(private admin: AdminService,private _router: ActivatedRoute ) { }
+  constructor(private admin: AdminService,private _router: ActivatedRoute,private cartService: CartService ) { }
   private subscription: Subscription;
   customOptions: any = {
     loop: true,
@@ -124,6 +125,17 @@ get_prodcut_by_cate(){
     this.tableSize = event.target.value;
     this.page = 1;
     this.getall_categories_section_begin();
+  }
+
+  items:any = [];
+  addToCart(item:any) {
+    if (!this.cartService.itemInCart(item)) {
+      item.qtyTotal = 1;
+      this.cartService.addToCart(item); //add items in cart
+      this.items = [...this.cartService.getItems()];
+      this.getall_categories_section_begin();
+      alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!')
+    }
   }
 
 }

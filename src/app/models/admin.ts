@@ -1,10 +1,8 @@
-// export class testapi {
-//     id : number;
-//     name :string;
-//     sex:string;
-//     age :number;
-//     phone: number;
-// }
+export class test {
+    product_id: number;
+    price: number;
+    quality:number
+}
 
 // export class users{
 //     id: number;
