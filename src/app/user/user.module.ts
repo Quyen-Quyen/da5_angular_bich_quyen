@@ -17,6 +17,7 @@ import { BlogDetailComponent } from './home/component/blog/blog-detail/blog-deta
 import { ProductComponent } from './home/component/product/product.component';
 import { CheckoutComponent } from './home/component/checkout/checkout.component';
 import { ContactComponent } from './home/component/contact/contact.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { SanitizeHtmlPipe } from '../share/pipe/sanitize-html.pipe';
 // import { ReactiveFormsModule } from '@angular/forms';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -85,8 +86,10 @@ const router_home:Routes=[
   imports: [
     CommonModule,
     SharedMessengerModule,
+    ReactiveFormsModule,
     // ReactiveFormsModule,
     // BrowserAnimationsModule,
+    FormsModule,
     HttpClientModule,
     NgxPaginationModule,
     RouterModule.forChild(router_home),

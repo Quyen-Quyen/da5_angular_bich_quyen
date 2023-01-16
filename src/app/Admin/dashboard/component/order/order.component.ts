@@ -43,10 +43,10 @@ export class OrderComponent implements OnInit {
   getall_order() {
     this.subcription = this.admin.get_all_order()
       .subscribe((data: any) => {
-        // console.log('order',data.data);
+        console.log('order',data);
         // console.log('product',data.product);
         // console.log('customer',data.customer);
-        this.order = data.data;
+        this.order = data.order;
         this.product = data.product;
         this.customer = data.customer;
 

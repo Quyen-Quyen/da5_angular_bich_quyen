@@ -1,28 +1,106 @@
 <div class="row my-3 bg-white" style="margin-left: 0px; margin-right: 0px;">
-  <form action="" method="POST" [formGroup]="order_fromEdit" (ngSubmit)="onEdit()" class="mb-5">
-  <div class="form-group">
-    <label for="">Tên sản phẩm</label>
-    <input type="text"  formControlName="product_id" class="form-control" placeholder="tên sản phẩm">
+  <h2 style="text-align: center;">Chi tiết đơn hàng</h2>
+  <!-- <form action="" method="POST" [formGroup]="order_fromEdit" (ngSubmit)="onEdit()" class="mb-5"> -->
+  <div class=""id="excel-table">
+    <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <label for="">Mã đơn hàng</label>
+        <p>{{ order.id }}</p>
+        <!-- <input type="text"  formControlName="product_id" class="form-control" placeholder="tên sản phẩm"> -->
+      </div>
+      <div class="col">
+        <label for="">tổng tiền đơn hàng</label>
+        <p>{{ order.total_price }}</p>
+        <!-- <input type="text"  formControlName="product_id" class="form-control" placeholder="tên sản phẩm"> -->
+      </div>
+      <div class="col">
+        <label for="">Trạng thái đơn hàng</label>
+        <p>Đang giao</p>
+        <!-- <input type="text"  formControlName="product_id" class="form-control" placeholder="tên sản phẩm"> -->
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="">Tên khách hàng</label>
-    <input type="text" formControlName="customer_id" class="form-control" placeholder="Tên khách hàng">
-  </div>
-  <div class="form-group">
-    <label for="">Kho</label>
+  <div class="form-group" *ngFor="let item of customer">
+    <h2 style="text-align: center;">Thông tin khách hàng</h2>
+    <br>
+    <div class="row">
+      <div class="col">
 
-    <input type="text" formControlName="warehouse_id" class="form-control" placeholder="Kho">
+        <label for="">Tên khách hàng</label>
+        <p>{{ item.name }}</p>
+      </div>
+      <div class="col">
+
+        <label for="">Số điện thoại liên hệ</label>
+        <p>{{ item.number_phone }}</p>
+      </div>
+      <div class="col">
+
+        <label for="">Email</label>
+        <p>{{ item.email }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <label for="">Địa chỉ giao hàng</label>
+      <p>{{ item.adress }}</p>
+    </div>
+
+
+    <!-- <input type="text" formControlName="customer_id" class="form-control" placeholder="Tên khách hàng"> -->
   </div>
   <br>
+  <table class="table table-striped rounded shadow-sm  bg-white ">
+    <thead>
+      <tr>
+        <td scope="col" width="50">STT</td>
+        <td>sản phẩm</td>
+        <td>Ảnh sản phẩm</td>
+        <td>Số lượng</td>
+        <td>Giá tiền/1 sản phẩm</td>
+        <!-- <td>Mã kho</td> -->
+        <!-- <td>Trạng thái</td> -->
+        <!-- <td>Chức năng</td> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of order_product ;let i = index">
+        <td>{{i+1}}</td>
+        <!-- <td>{{item.id}}</td> -->
+        <td>{{item.name}}</td>
+        <td class="shoping__cart__item">
+          <img src="{{ item.img_src }}" alt="" [width]="100" [height]="100">
+          <!-- <img src="./assets/image/cart/cart-3.jpg" alt=""> -->
+        </td>
+        <td>{{item.qtyTotal}}</td>
+        <td>{{item.price}}</td>
+        <!-- <td>{{or.warehouse_id}}</td> -->
+        <!-- <td>{{or.name_status}}</td> -->
+        <td>
+
+          <!-- <a class="btn btn-secondary" style="margin-right: 10px ;"
+            [routerLink]="['/admin/order-edit/',or.id]">Chi tiết đơn hàng</a>
+          <button type="button" class="btn btn-danger" (click)="onDelete(or.id)">Xóa</button> -->
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
   <div style="text-align: center;">
-    
-    <button type="button" [routerLink]="['/admin/order']" class="btn btn-secondary" >
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+    <div class="col-7">
+      <button class="btn btn-dark mt-2 " style="float: right;" (click)="exportexcel()">Xuất excel</button>
+
+    </div>
+    <button type="button" style="margin-bottom: 10px;" [routerLink]="['/admin/order']" class="btn btn-secondary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
       </svg>
       quay lại</button>
-      <button type="submit" class="btn btn-primary" style="margin-left: 5px;" >Save</button>
-      
-    </div>
-</form>
+    <!-- <button type="submit" class="btn btn-primary" style="margin-left: 5px;" >Save</button> -->
+    <!-- <br> -->
+  </div>
+  <!-- </form> -->
 </div>

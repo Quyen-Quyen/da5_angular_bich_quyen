@@ -147,7 +147,7 @@
                                             <ul class="product__item__pic__hover">
                                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li><a  (click)="addToCart(slide)" ><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
 
@@ -155,7 +155,7 @@
                                         <div class="product__discount__item__text">
                                             <span>Dried Fruit</span>
                                             <h5><a [routerLink]="['/san-pham/',slide.id]">{{ slide.name }}</a></h5>
-                                            <div class="product__item__price">{{ slide.price }} Vnđ<span>{{
+                                            <div class="product__item__price" style="color: red;">{{ slide.price |currency:'VND'}} <span>{{
                                                     slide.default_price }}</span></div>
                                         </div>
                                     </div>
@@ -201,12 +201,12 @@
                                 <ul class="product__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><a  (click)="addToCart(item)" ><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
                                 <h6><a [routerLink]="['/san-pham/',item.id]">{{ item.name }}</a></h6>
-                                <h5>{{ item.price }} Vnđ</h5>
+                                <h5 style="color: red;">{{ item.price |currency:'VND'}} </h5>
                             </div>
                         </div>
                     </div>
@@ -237,7 +237,7 @@
                             </div>
                             <div class="product__item__text">
                                 <h6><a [routerLink]="['/san-pham/',item.id]">{{ item.name }}</a></h6>
-                                <h5>{{ item.price }} Vnđ</h5>
+                                <h5 style="color: red;">{{ item.price |currency:'VND'}} </h5>
                             </div>
                         </div>
                     </div>
@@ -257,12 +257,12 @@
                                 <ul class="product__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><a (click)="addToCart(item)"><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
                                 <h6><a [routerLink]="['/san-pham/',item.id]">{{ item.name }}</a></h6>
-                                <h5>{{ item.price }} Vnđ</h5>
+                                <h5 style="color: red;"> {{ item.price |currency:'VND'}} </h5>
                             </div>
                         </div>
                     </div>
@@ -282,12 +282,12 @@
                                 <ul class="product__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><a (click)="addToCart(item)"><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
                                 <h6><a [routerLink]="['/san-pham/',item.id]">{{ item.name }}</a></h6>
-                                <h5>{{ item.price }} Vnđ</h5>
+                                <h5 style="color: red;">{{ item.price  |currency:'VND'}} </h5>
                             </div>
                         </div>
                     </div>
@@ -307,12 +307,12 @@
                                 <ul class="product__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><a (click)="addToCart(item)"><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
                                 <h6><a [routerLink]="['/san-pham/',item.id]">{{ item.name }}</a></h6>
-                                <h5>{{ item.price }} Vnđ</h5>
+                                <h5 style="color: red;">{{ item.price |currency:'VND'}} </h5>
                             </div>
                         </div>
                     </div>

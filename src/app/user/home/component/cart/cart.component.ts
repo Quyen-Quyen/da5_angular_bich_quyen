@@ -13,8 +13,8 @@ import {
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  @ViewChildren('$subTotalWrap') subTotalItems: QueryList<ElementRef>;
-  @ViewChildren('subTotalWrap_existing')
+  // @ViewChildren('$subTotalWrap') subTotalItems: QueryList<ElementRef>;
+  // @ViewChildren('subTotalWrap_existing')
   products:any[]=[];
   items:any = [];
   // subtotal :any;

@@ -25,10 +25,10 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="shoping__product">Tên sản phẩm</th>
-                                    <th>giá</th>
+                                    <th class="shoping__product">Sản phẩm</th>
+                                    <th>Đơn giá</th>
                                     <th>số lượng</th>
-                                    <th>Tổng cộng</th>
+                                    <th>Số tiền</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -40,7 +40,7 @@
                                         <h5>{{ item.name }}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        {{ item.price }}Vnđ
+                                        <span class= "font-weight-bold">{{ item.price |currency:'VND'}}</span> 
                                     </td>
                                     <td class="shoping__cart__quantity">
                                                <!-- <input 
@@ -54,25 +54,7 @@
                                         <div class="quantity">
                                             <div class="pro-qty">
                                          
-                                                <!-- <input
-                                                [(ngModel)]="item.qtyTotal"
-                                                [ngModelOptions]="{ standalone: true }"
-                                                min="1"
-                                                type="number"
-                                                value="{{ item.qtyTotal }}"
-                                                name=""
-                                                (change)="changeSubtotal(item, i)"
-                                                /> -->
-                                                <!-- <input
-                                                [(ngModel)]="item.qtyTotal"
-                                                [ngModelOptions]="{ standalone: true }"
-                                                min="1"
-                                                type="number"
-                                                value="{{ item.qtyTotal }}"
-                                                name=""
-                                                (change)="changeSubtotal(item, index)"
-                                                /> -->
-                                                <!-- class="form-control" -->
+                               
                                                 <input 
                                                 (change)="changeSubtotal(i, $event)" 
                                                 type="number"
@@ -84,8 +66,8 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="shoping__cart__total">
-                                        {{subtotal(item)}}
+                                    <td class="shoping__cart__total" style="color: #FF3333;">
+                                        {{subtotal(item)|currency:'VND'}}
                                                                                 <!-- {{ subTotal }} -->
                                     </td>
                                     <td class="shoping__cart__item__close" (click)="removeFromCart(item)">
@@ -125,7 +107,7 @@
                                 <h5>Tổng tiền</h5>
                             </div>
                             <div class="col">
-                                <span class="font-weight-bold" style="float: right;">{{ total  }}</span>
+                                <span class="font-weight-bold" style="float: right;color: #FF3333;">{{ total|currency:'VND' }}</span>
                             </div>
                         </div>
                         <div class="row">
@@ -134,18 +116,18 @@
                                 <h5>Phí ship </h5>
                             </div>
                             <div class="col">
-                                <span class="font-weight-bold" style="float: right;">25000</span>
-                            </div>
+                                <span class= "font-weight-bold"  style="float: right;color: #FF3333;">{{ 25000|currency:'VND' }}</span>
+                            </div>Vnđ
                         </div>
                        
                   <hr>
 
                         <ul>
-                            <li>Thành tiền <span>{{ sumtotal }}</span></li>
+                            <li>Thành tiền <span>{{ sumtotal |currency:'VND' }}</span></li>
                             <!-- Order Total: -->
                           
                         </ul>
-                        <a href="#" class="primary-btn">Thanh toán</a>
+                        <a href="/thanh-toan" class="primary-btn">Thanh toán</a>
                     </div>
                 </div>
             </div>

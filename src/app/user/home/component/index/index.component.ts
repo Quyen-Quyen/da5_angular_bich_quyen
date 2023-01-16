@@ -159,6 +159,8 @@ export class IndexComponent implements OnInit {
       item.qtyTotal = 1;
       this.cartService.addToCart(item); //add items in cart
       this.items = [...this.cartService.getItems()];
+      this.getall_categories_section_begin();
+      alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!')
     }
   }
 

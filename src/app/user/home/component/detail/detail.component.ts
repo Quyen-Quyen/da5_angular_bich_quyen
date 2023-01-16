@@ -13,7 +13,7 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class DetailComponent implements OnInit {
   id: number = 0;
-  product_detail: any[]=[];
+  product_detail: any=[];
   subTotal:any;
 
   product_all:any;
@@ -33,19 +33,7 @@ export class DetailComponent implements OnInit {
     private cartService: CartService
   ) { }
   private subscription: Subscription
-  // addToCart(products:any) {
- 
-  //   if(!this.cartService.productInCart(products)){
-  //     products.quantity =1;
-  //     // this.subTotal=products.price;
-  //     // console.log(this.subTotal);
-  //     this.cartService.addToCart(products)
-  //     this.items = [...this.cartService.get_product()];
-      
-  //   }
 
-
-  // }
   ngOnInit() {
     this.get_detail();
 
@@ -60,12 +48,14 @@ export class DetailComponent implements OnInit {
     this.subscription = this.admin.get_detail(this.id).subscribe((data: any) => {
 
       console.log('nef',data);
+      this.product_detail = data;
+
       this.detail_name = data.name;
       this.detail_price = data.default_price;
       this.detail_img_src = data.img_src;
       this.detail_description = data.description;
-      console.log(this.detail_name);
-      this.product_detail = data;
+      // console.log(this.detail_name);
+      // this.product_detail = data;
       console.log('data,',this.product_detail);
     })
   }
@@ -75,44 +65,7 @@ export class DetailComponent implements OnInit {
       this.product_all=data.product;
     })
   }
-  // addtoCart(product_detail: any) {
-  //   // alert(product_detail)
-  //   // console.log(product_detail)
-  //   // this.cartService.addItem(product_detail)
-  // };
-  //----- add item to cart
 
-
-  // onaddtocart(products:any){
-  //   let idx=this.cartService.GetCarts().findIndex((item:any)=>{
-  //     return item.id==products.PRO_ID
-  //   });
-  //   if(idx>=0){
-  //     this.cartService.GetCarts()[idx].quantity +=1;
-  //   }else{
-  //     let cartitem: any={
-  //       id: products.PRO_ID,
-  //       name: products.ProName,
-  //       price: products.ProPrice,
-  //       image: products.ProImage,
-  //       quantity:1,
-  //       subtotal: function(){
-  //         return this.price*this.quantity;
-  //       }
-  //     }
-  //     this.cartService.GetCarts().push(cartitem)
-  //   }
-
-  //   // this.cartService.savecart(this.cartService.GetCarts())
-  //   // Swal.fire({
-  //   //   title: 'Thêm vào giỏ hàng thành công',
-  //   //   icon: 'success'
-  //   // });
-  //   // this.totalquanlity=this.pro.getcarttotalquanlity();
-  //   // alert('thêm giỏ hàng thành công!')
-  //   console.log('them thanh cong')
-  //   this.totalquanlity=this.cartService.getcarttotalquanlity();
-  // }
 
 
 
@@ -122,6 +75,7 @@ export class DetailComponent implements OnInit {
       item.qtyTotal = 1;
       this.cartService.addToCart(item); //add items in cart
       this.items = [...this.cartService.getItems()];
+      alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!')
     }
   }
 }
