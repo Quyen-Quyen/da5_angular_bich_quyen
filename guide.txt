@@ -1,0 +1,6 @@
+kéo project trên git 
+git clone ----name_url_project---
+
+tải về xong chạy:  npm install 
+để tạo file node_modules
+--oke---
