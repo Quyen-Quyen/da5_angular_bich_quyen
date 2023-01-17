@@ -1,6 +1,37 @@
+--thao tác tải code về -----
 kéo project trên git 
 git clone ----name_url_project---
 
 tải về xong chạy:  npm install 
 để tạo file node_modules
 --oke---
+
+
+--- Sử dụng git----
+
+-- thao tác up code---
+git status 
+--kiểm tra sự thay đổi của code
+
+git add .
+--- lưu toàn bộ code vào nhanh git(local)
+
+git commit -m"ghi thông tin cần node"
+--- lưu thông tin node lên git
+
+git push origin bichquyen 
+--- đẩy code lên nhánh bichquyen ( đẩy lên github)
+
+
+-- thao tác kéo code mới về ---
+ b1 : nếu đang ở 1 nhánh khác nhánh main thì :
+ git checkout main
+
+ b2 : git pull
+ --tải code từ git về local
+
+ b3 : git checkout bichquyen
+  ---quay lại nhánh của mình
+
+b4 : git merge main
+-- hợp nhất nhánh bichquyen với main
