@@ -109,50 +109,6 @@ export class IndexComponent implements OnInit {
   }
 
 
-  
-    // if(!this.cartService.productInCart(products)){
-    //   products.quantity =1;
-    //   // this.subTotal=products.price;
-    //   // console.log(this.subTotal);
-    //   this.cartService.addToCart(products)
-    //   this.items = [...this.cartService.get_product()];
-
-  // onaddtocart(products: any) {
-  //   console.log('111')
-  //   let idx = this.cartService.GetCarts().findIndex((item: any) => {
-  //     console.log('item.id',item.id);
-  //     return item.id == products.PRO_ID
-  //   });
-  //   if (idx >= 0) {
-  //     this.cartService.GetCarts()[idx].quantity += 1;
-  //   } else {
-  //     let cartitem: any = {
-  //       id: products.PRO_ID,
-  //       name: products.ProName,
-  //       price: products.ProPrice,
-  //       image: products.ProImage,
-  //       quantity: 1,
-  //       subtotal: function () {
-  //         return this.price * this.quantity;
-  //       }
-  //     }
-  //     this.cartService.GetCarts().push(cartitem)
-  //   }
-
-  //   // this.cartService.savecart()
-  //   // // this.cartService.savecart(this.cartService.GetCarts())
-  //   // // Swal.fire({
-  //   // //   title: 'Thêm vào giỏ hàng thành công',
-  //   // //   icon: 'success'
-  //   // // });
-  //   // // this.totalquanlity=this.pro.getcarttotalquanlity();
-  //   // // alert('thêm giỏ hàng thành công!')
-  //   // console.log('them thanh cong')
-  //   // this.totalquanlity = this.cartService.getcarttotalquanlity();
-  // }
-
-
-
   items:any = [];
   addToCart(item:any) {
     if (!this.cartService.itemInCart(item)) {

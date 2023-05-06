@@ -6,20 +6,17 @@ import { RegisterComponent } from './register/register.component';
 import { TestppComponent } from './testpp/testpp.component';
 
 const routes: Routes = [
-  {
-    path:"admin",
-    loadChildren:() =>
-    import('./Admin/admin.module').then((m)=>m.AdminModule),
-  },
+  // {
+  //   path:"admin",
+  //   loadChildren:() =>
+  //   import('./Admin/admin.module').then((m)=>m.AdminModule),
+  // },
   {
     path:"",
     loadChildren:() =>
     import('./user/user.module').then((m)=>m.UserModule),
   },
-  {
-    path:'test',
-    component:TestppComponent
-  },
+
   {
     path:'login',
     component:LoginComponent

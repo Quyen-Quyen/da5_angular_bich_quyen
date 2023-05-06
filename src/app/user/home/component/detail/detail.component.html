@@ -7,17 +7,9 @@
                   <div class="product__details__pic__item">
                       <img [src]="detail_img_src "   class="product__details__pic__item--large"
                       alt="">
+                      <img [src]="'http://127.0.0.1:8000/storage/image/product/'+detail_img_src" alt="" >
+
                   </div>
-                  <!-- <div class="product__details__pic__slider owl-carousel">
-                      <img data-imgbigurl="./assets/image/product/details/product-details-2.jpg"
-                          src="./assets/image/product/details/thumb-1.jpg" alt="">
-                      <img data-imgbigurl="img/product/details/product-details-3.jpg"
-                          src="./assets/image/product/details/thumb-2.jpg" alt="">
-                      <img data-imgbigurl="img/product/details/product-details-5.jpg"
-                          src="./assets/image/product/details/thumb-3.jpg" alt="">
-                      <img data-imgbigurl="img/product/details/product-details-4.jpg"
-                          src="./assets/image/product/details/thumb-4.jpg" alt="">
-                  </div> -->
               </div>
           </div>
           <div class="col-lg-6 col-md-6">
@@ -36,7 +28,7 @@
                   <div class="product__details__quantity">
                       <div class="quantity">
                           <div class="pro-qty">
-                              <input type="text" value="1">
+                              <input type="number" value="1">
                           </div>
                       </div>
                   </div>
@@ -44,9 +36,9 @@
                   <!-- <a >ADD TO CARD</a> -->
                   <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                   <ul>
-                      <li><b>Số lượng:</b> <span>347</span></li>
+                      <li><b>Số lượng:</b> <span>{{quantity}}</span></li>
                       <!-- <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li> -->
-                      <li><b>Cân nặng:</b> <span>0.5 kg</span></li>
+                      <!-- <li><b>Cân nặng:</b> <span>0.5 kg</span></li> -->
                       <li><b>Chia sẻ</b>
                           <div class="share">
                               <a href="#"><i class="fa fa-facebook"></i></a>
@@ -69,30 +61,30 @@
                           <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
                               aria-selected="false">Thông tin</a>
                       </li>
-                      <li class="nav-item">
+                      <!-- <li class="nav-item">
                           <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
                               aria-selected="false">Nhận xét <span>(1)</span></a>
-                      </li>
+                      </li> -->
                   </ul>
                   <div class="tab-content">
                       <div class="tab-pane active" id="tabs-1" role="tabpanel">
                           <div class="product__details__tab__desc">
-                              <h6>Thông tin sản phẩm</h6>
+                              <h6>Thông tin mô tả</h6>
                               <p>{{ detail_description }}</p>
                           </div>
                       </div>
                       <div class="tab-pane" id="tabs-2" role="tabpanel">
                           <div class="product__details__tab__desc">
-                              <h6>Products Infomation</h6>
-                              <p>hello</p>
+                            <h6>Thông tin sản phẩm</h6>
+                            <p>{{ tech_specs }}</p>
                           </div>
                       </div>
-                      <div class="tab-pane" id="tabs-3" role="tabpanel">
+                      <!-- <div class="tab-pane" id="tabs-3" role="tabpanel">
                           <div class="product__details__tab__desc">
                               <h6>Thông tin sản phẩm</h6>
-                              <p>{{ detail_description }}</p>
+                              <p>{{ tech_specs }}</p>
                           </div>
-                      </div>
+                      </div> -->
                   </div>
               </div>
           </div>

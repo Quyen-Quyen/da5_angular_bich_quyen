@@ -23,6 +23,8 @@ export class DetailComponent implements OnInit {
   detail_price: any;
   detail_img_src: any;
   detail_description: any;
+  tech_specs: any;
+  quantity: any;
   products:any[]=[];
   // items:any;
   // totalquanlity: number=this.cartService.getcarttotalquanlity();
@@ -47,15 +49,16 @@ export class DetailComponent implements OnInit {
 
     this.subscription = this.admin.get_detail(this.id).subscribe((data: any) => {
 
-      console.log('nef',data);
+      console.log('nef',data[0].images[0].image);
       this.product_detail = data;
 
-      this.detail_name = data.name;
-      this.detail_price = data.default_price;
-      this.detail_img_src = data.img_src;
-      this.detail_description = data.description;
-      // console.log(this.detail_name);
-      // this.product_detail = data;
+      this.detail_name = data[0].name;
+      this.detail_price = data[0].default_price;
+      this.detail_img_src = data[0].images[0].image;
+      this.detail_description = data[0].description;
+      this.tech_specs = data[0].tech_specs;
+      this.quantity = data[0].quantity;
+
       console.log('data,',this.product_detail);
     })
   }

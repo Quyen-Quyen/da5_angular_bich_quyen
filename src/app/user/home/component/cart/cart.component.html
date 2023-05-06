@@ -15,7 +15,7 @@
         </div>
     </section>
 
-    
+
     <!-- Shoping Cart Section Begin -->
     <section class="shoping-cart spad">
         <div class="container">
@@ -40,10 +40,10 @@
                                         <h5>{{ item.name }}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        <span class= "font-weight-bold">{{ item.price |currency:'VND'}}</span> 
+                                        <span class= "font-weight-bold">{{ item.default_price |currency:'VND'}}</span>
                                     </td>
                                     <td class="shoping__cart__quantity">
-                                               <!-- <input 
+                                               <!-- <input
                                                 [(ngModel)]="item.quantity"
                                                 [ngModelOptions]="{ standalone: true }"
                                                 min="1"
@@ -53,15 +53,15 @@
                                                 (change)="changeSubtotal(item, i)"> -->
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                         
-                               
-                                                <input 
-                                                (change)="changeSubtotal(i, $event)" 
+
+
+                                                <input
+                                                (change)="changeSubtotal(i, $event)"
                                                 type="number"
-                                                 name="" 
+                                                 name=""
                                                  min="1"
-                                                 id="" 
-                                                 [value]="item.qtyTotal" 
+                                                 id=""
+                                                 [value]="item.qtyTotal"
                                                  style="width: 60px; text-align: center">
                                             </div>
                                         </div>
@@ -119,13 +119,13 @@
                                 <span class= "font-weight-bold"  style="float: right;color: #FF3333;">{{ 25000|currency:'VND' }}</span>
                             </div>Vnđ
                         </div>
-                       
+
                   <hr>
 
                         <ul>
                             <li>Thành tiền <span>{{ sumtotal |currency:'VND' }}</span></li>
                             <!-- Order Total: -->
-                          
+
                         </ul>
                         <a href="/thanh-toan" class="primary-btn">Thanh toán</a>
                     </div>
