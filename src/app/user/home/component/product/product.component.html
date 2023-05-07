@@ -27,7 +27,7 @@
                         </div>
                         <ul>
                             <li *ngFor="let item of category"><a href="#">{{ item.name }}</a></li>
-    
+
                         </ul>
                     </div>
                 </div> -->
@@ -142,11 +142,12 @@
 
                                         <div class="product__discount__item__pic">
 
-                                            <img [src]="slide.img_src">
+                                            <!-- <img [src]="slide.img_src"> -->
+                                            <img [src]="'http://127.0.0.1:8000/storage/image/product/'+slide.images?.[0]?.image" alt="" >
+
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                              <li><a  [routerLink]="['/san-pham/',slide.id]"><i class="fa fa-eye"></i></a></li>
                                                 <li><a  (click)="addToCart(slide)" ><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -197,11 +198,12 @@
                         *ngFor="let item of all_product| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
                         <div class="product__item">
                             <div class="product__item__pic set-bg">
-                                <img [src]="item.img_src" alt="">
+                                <!-- <img [src]="item.img_src" alt=""> -->
+                                <img [src]="'http://127.0.0.1:8000/storage/image/product/'+item.images?.[0]?.image" alt="" >
+
                                 <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a  (click)="addToCart(item)" ><i class="fa fa-shopping-cart"></i></a></li>
+                                  <li><a  [routerLink]="['/san-pham/',item.id]"><i class="fa fa-eye"></i></a></li>
+                                  <li><a  (click)="addToCart(item)" ><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
@@ -218,10 +220,9 @@
                         </pagination-controls>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="filter__found">
                         <h2>Hoa quả</h2>
-                        <!-- <h2>{{ cate.id }}</h2> -->
                     </div>
 
                     <div class="col-lg-4 col-md-6 col-sm-6"
@@ -246,7 +247,6 @@
                 <div class="row">
                     <div class="filter__found">
                         <h2>Rau củ</h2>
-                        <!-- <h2>{{ cate.id }}</h2> -->
                     </div>
 
                     <div class="col-lg-4 col-md-6 col-sm-6"
@@ -271,7 +271,6 @@
                 <div class="row">
                     <div class="filter__found">
                         <h2>Đồ uống</h2>
-                        <!-- <h2>{{ cate.id }}</h2> -->
                     </div>
 
                     <div class="col-lg-4 col-md-6 col-sm-6"
@@ -296,7 +295,6 @@
                 <div class="row">
                     <div class="filter__found">
                         <h2>Thức ăn</h2>
-                        <!-- <h2>{{ cate.id }}</h2> -->
                     </div>
 
                     <div class="col-lg-4 col-md-6 col-sm-6"
@@ -317,7 +315,7 @@
                         </div>
                     </div>
                     <hr>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

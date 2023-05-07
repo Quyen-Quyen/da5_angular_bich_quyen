@@ -1,10 +1,10 @@
 
 <div class="login-container" >
   <form  method="POST" [formGroup]="form"  (ngSubmit)="register()" autocomplete="on" class="login-form" name="loginForm" id="form-1">
- 
+
    <h3 class="heading">Đăng ký tài khoản</h3>
    <p class="desc mb-16 pt-16"></p>
- 
+
    <div class="form-group">
        <label for="name" class="form-label">Tên người dùng</label>
        <input  id="name" type="name" formControlName="name" placeholder="nhập tên người dùng" class="form-control">
@@ -13,7 +13,7 @@
        <label for="email" class="form-label">Email</label>
        <input  id="email" type="email" formControlName="email" placeholder="VD: email@gmail.com" class="form-control">
    </div>
- 
+
    <div class="form-group">
        <label for="password" class="form-label">Mật khẩu</label>
        <input id="password" type="password"  formControlName="password" placeholder="Nhập mật khẩu" class="form-control" >
@@ -21,6 +21,6 @@
    <button type="submit" class="form-submit" >
        Đăng ký
    </button>
+   <label class="form-label mt-2">Bạn đã có tài khoản <span><u><a href="login" class="register">Đăng nhập</a></u></span></label>
  </form>
  </div>
- 

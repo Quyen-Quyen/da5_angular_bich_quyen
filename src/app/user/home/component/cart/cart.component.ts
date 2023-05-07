@@ -46,9 +46,9 @@ export class CartComponent implements OnInit {
 
   subtotal(item:any){
 
-    return item.qtyTotal*item.price;
+    return item.qtyTotal*item.default_price;
   }
-  
+
   //----- remove specific item
   removeFromCart(item:any) {
     this.cartService.removeItem(item);
@@ -67,9 +67,9 @@ export class CartComponent implements OnInit {
       return this.items.reduce(
         (sum:any, x:any) => ({
           qtyTotal: 1,
-          price: sum.price + x.qtyTotal * x.price,
+          default_price: sum.default_price + x.qtyTotal * x.default_price,
         }),
-        { qtyTotal: 1, price: 0 }
+        { qtyTotal: 1, default_price: 0 }
       ).price;
     }
     // tổng tien
@@ -78,9 +78,9 @@ export class CartComponent implements OnInit {
       return this.items.reduce(
         (sum:any, x:any) => ({
           qtyTotal: 1,
-          price: this.total+25000,
+          default_price: this.total+25000,
         }),
-        { qtyTotal: 1, price: 0 }
+        { qtyTotal: 1, default_price: 0 }
       ).price;
     }
 }

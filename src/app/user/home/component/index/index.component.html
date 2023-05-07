@@ -1,3 +1,15 @@
+<div id="advertisement">
+  <div class="advertisement"></div>
+  <div class="text">
+    <img src="./assets/image/banner/banner_left.png" alt="">
+  </div>
+  <!-- <button class="button">Mua ngay</button> -->
+</div>
+<div id="advertisement-right">
+  <div class="discount">50% OFF</div>
+  <div class="text">Mua hàng hôm nay và nhận được giảm giá lên đến 50%!Mua hàng hôm nay và nhận được giảm giá lên đến 50%!Mua hàng hôm nay và nhận được giảm giá lên đến 50%!Mua hàng hôm nay và nhận được giảm giá lên đến 50%!</div>
+  <button class="button">Mua ngay</button>
+</div>
 <section class="hero">
     <div class="container">
         <div class="row">
@@ -88,7 +100,9 @@ s
                     <ng-template carouselSlide [id]="slide.id">
                         <div class="categories__item">
 
-                            <img [src]="slide.img_src">
+                            <!-- <img [src]="slide.img_src"> -->
+                            <img [src]="'http://127.0.0.1:8000/storage/image/product/'+slide.images?.[0]?.image" alt="" >
+
                             <h5><a [routerLink]="['/san-pham/',slide.id]">{{ slide.name }}</a></h5>
                         </div>
                     </ng-template>
@@ -117,16 +131,16 @@ s
                 *ngFor="let item of all_product| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg">
-                        <img [src]="item.img_src" alt="">
+                      <img [src]="'http://127.0.0.1:8000/storage/image/product/'+item.images?.[0]?.image" alt="" >
+                        <!-- <img [src]="item.img_src" alt=""> -->
                         <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a  [routerLink]="['/san-pham/',item.id]"><i class="fa fa-eye"></i></a></li>
                             <li><a  (click)="addToCart(item)"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
                         <h6><a [routerLink]="['/san-pham/',item.id]">{{ item.name }}</a></h6>
-                        <h5 style="color: red;">{{ item.price |currency:'VND' }} Vnđ</h5>
+                        <h5 style="color: red;">{{ item.default_price |currency:'VND' }} Vnđ</h5>
                     </div>
                 </div>
             </div>
@@ -152,21 +166,7 @@ s
             </div>
         </div>
         <div class="row">
-            <!-- <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="blog__item">
-                    <div class="blog__item__pic">
-                        <img src="./assets/image/blog/blog-1.jpg" alt="">
-                    </div>
-                    <div class="blog__item__text">
-                        <ul>
-                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
-                        </ul>
-                        <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                        <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                    </div>
-                </div>
-            </div> -->
+
             <div class="col-lg-4 col-md-4 col-sm-6" *ngFor="let item of posts" >
                 <div class="blog__item">
                     <div class="blog__item__pic">
@@ -185,7 +185,7 @@ s
                     </div>
                 </div>
             </div>
-           
+
         </div>
     </div>
 </section>
