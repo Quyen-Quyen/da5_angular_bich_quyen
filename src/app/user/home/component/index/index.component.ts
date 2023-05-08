@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/cart_Service/cart.service';
 import { AdminService } from 'src/app/service/admin.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,6 +20,8 @@ export class IndexComponent implements OnInit {
   show_by_cate_product_14: any;
   show_by_cate_product_15: any;
   all_product: any;
+  featured_products: any;
+  featured_post: any;
   //phân trang
   // POSTS: any;
   page: number = 1;
@@ -55,7 +58,9 @@ export class IndexComponent implements OnInit {
     nav: true
   }
   constructor(private admin: AdminService,
-    private cartService: CartService) { }
+    private cartService: CartService,
+    private router: Router,
+    ) { }
   private subscription: Subscription
   ngOnInit(): void {
 
@@ -73,24 +78,24 @@ export class IndexComponent implements OnInit {
   }
   getall_categories_section_begin() {
     this.subscription = this.admin.get_index_product().subscribe((data: any) => {
-      console.log(data);
+      console.log('data_category', data.category);
       console.log(data.product);
       this.categories_section_begin = data.product;
-      this.category = data.category;
+      this.category = data.category_limit;
       // this.show_by_cate_product=data.show_by_cate_product;
-      this.all_product = data.all_product;
+      this.featured_products = data.featured_products;
     }, error => {
       console.log(error);
     }
     )
 
   }
-
   get_posts() {
     this.subscription = this.admin.get_index_posts().subscribe((data: any) => {
-      console.log(data.posts_index);
+      console.log('ảnh',data.featured_post);
       // console.log(data.type_posts);
       this.posts = data.posts_index;
+      this.featured_post = data.featured_post;
       // this.type_posts = data.type_posts;
     }, error => {
       console.log(error);

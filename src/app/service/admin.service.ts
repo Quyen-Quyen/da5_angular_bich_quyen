@@ -129,9 +129,6 @@ get_detail_posts(id: number): Observable<any> {
 get_product_by_cate(category: number): Observable<any> {
   return this._httpClient.get<any>(this.API_URL + 'get_product_by_category?category='+ category);
 }
-
-
-
 }
 
 

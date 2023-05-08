@@ -15,7 +15,7 @@
         Preloader
     --------------------*/
     $(window).on('load', function () {
-        
+
     $('.hero__categories__all').on('click', function(){
         $('.hero__categories ul').slideToggle(400);
     });
@@ -90,17 +90,12 @@
     /*------------------
         Single Product
     --------------------*/
+
+
     $('.product__details__pic__slider img').on('click', function () {
-
-        var imgurl = $(this).data('imgbigurl');
-        var bigImg = $('.product__details__pic__item--large').attr('src');
-        if (imgurl != bigImg) {
-            $('.product__details__pic__item--large').attr({
-                src: imgurl
-            });
-        }
-    });
-
+      var imgurl = $(this).attr('src');
+      $('.product__details__pic__item--large').attr('src', imgurl);
+  });
 
     });
 

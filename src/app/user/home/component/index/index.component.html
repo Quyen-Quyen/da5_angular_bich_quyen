@@ -16,8 +16,8 @@
             <div class="col-lg-3">
                 <div class="hero__categories">
                     <div class="hero__categories__all">
-                        <i class="fa fa-bars"></i>
-                        <span>All departments</span>
+                        <!-- <i class="fa fa-bars"></i> -->
+                        <span>Danh mục sản phẩm</span>
                     </div>
                     <ul>
                         <li *ngFor="let item of category"><a href="#">{{ item.name }}</a></li>
@@ -30,11 +30,11 @@
                     <div class="hero__search__form">
                         <form action="#">
                             <div class="hero__search__categories">
-                                All Categories
-                                <span class="arrow_carrot-down"></span>
+                                Tìm kiếm sản phẩm
+                                <!-- <span class="arrow_carrot-down"></span> -->
                             </div>
                             <input type="text" placeholder="What do yo u need?">
-                            <button type="submit" class="site-btn">SEARCH</button>
+                            <button type="submit" class="site-btn">Tìm</button>
                         </form>
                     </div>
                     <div class="hero__search__phone">
@@ -42,8 +42,8 @@
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5>+65 11.188.888</h5>
-                            <span>support 24/7 time</span>
+                            <h5>0869 638 364</h5>
+                            <span>Hỗ trợ 24/7 thời gian</span>
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ s
                             <!-- <img [src]="slide.img_src"> -->
                             <img [src]="'http://127.0.0.1:8000/storage/image/product/'+slide.images?.[0]?.image" alt="" >
 
-                            <h5><a [routerLink]="['/san-pham/',slide.id]">{{ slide.name }}</a></h5>
+                            <h5><a href="/san-pham/{{ slide.id }}" >{{ slide.name }}</a></h5>
                         </div>
                     </ng-template>
                 </ng-container>
@@ -120,54 +120,126 @@ s
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-
-                    <h2>Toàn bộ sản phẩm</h2>
+                    <h2>Sản phẩm nổi bật</h2>
                 </div>
 
             </div>
         </div>
         <div class="row featured__filter">
             <div class="col-lg-3 col-md-4 col-sm-6"
-                *ngFor="let item of all_product| paginate:{ itemsPerPage : tableSize, currentPage: page, totalItems: count};let i = index">
+                *ngFor="let item of featured_products">
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg">
                       <img [src]="'http://127.0.0.1:8000/storage/image/product/'+item.images?.[0]?.image" alt="" >
-                        <!-- <img [src]="item.img_src" alt=""> -->
                         <ul class="featured__item__pic__hover">
-                            <li><a  [routerLink]="['/san-pham/',item.id]"><i class="fa fa-eye"></i></a></li>
+                            <li><a href="/san-pham/{{ item.id }}" ><i class="fa fa-eye"></i></a></li>
                             <li><a  (click)="addToCart(item)"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6><a [routerLink]="['/san-pham/',item.id]">{{ item.name }}</a></h6>
+                        <h6><a href="/san-pham/{{ item.id }}" >{{ item.name }}</a></h6>
                         <h5 style="color: red;">{{ item.default_price |currency:'VND' }} Vnđ</h5>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-12" style="text-align: center;">
+        <!-- <div class="col-lg-12" style="text-align: center;">
             <div>
                 <pagination-controls previousLabel="" nextLabel="" (pageChange)="ontableDataChange($event)">
                 </pagination-controls>
             </div>
-        </div>
+        </div> -->
 
     </div>
 </section>
+
+
+
+
+<!--
+<section class="featured spad">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="section-title">
+                  <h2>Featured Product</h2>
+              </div>
+              <div class="featured__controls">
+                  <ul>
+                      <li class="active" data-filter="*">All</li>
+                      <li *ngFor="let category of category" data-filter=".1">{{category.name}}</li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="row featured__filter" id="featured__filter">
+          <div class="col-lg-3 col-md-4 col-sm-6 mix 1" *ngFor="let product of categories_section_begin" >
+              <div class="featured__item">
+                  <div class="featured__item__pic set-bg" [style.background-image]="'url(' + 'http://127.0.0.1:8000/storage/image/product/' + product.images?.[0]?.image + ')'">
+                      <ul class="featured__item__pic__hover">
+                          <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                          <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                          <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                      </ul>
+                  </div>
+                  <div class="featured__item__text">
+                      <h6><a href="#">{{ product.name }}</a></h6>
+                      <h5>{{ product.price }}</h5>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section> -->
+
+
+
 <!-- Blog Section Begin -->
 <section class="from-blog spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title from-blog__title">
-                    <h2>Các bài viết</h2>
+                    <h2>Bài viết</h2>
                 </div>
             </div>
         </div>
         <div class="row">
+          <div class="col-lg-8">
+            <div class="row"  >
+              <a href="/chi-tiet-bai-viet/{{ featured_post.id }}">
+              <img  class="style-image" [src]="'http://127.0.0.1:8000/storage/'+featured_post.image" width="100%" height="400px">
+            </a>
+            </div>
+            <div class="row mt-3">
+              <h3><a href="/chi-tiet-bai-viet/{{ featured_post.id }}" style="color: black;">{{ featured_post.title }}</a></h3>
+              <span><i style="font-size: 14px;" class="fa fa-calendar-o" ></i> {{ featured_post.created_at|date:'dd/MM/yyyy' }}</span>
+              <p [innerHTML]="featured_post.content | slice:0:200"></p>
 
-            <div class="col-lg-4 col-md-4 col-sm-6" *ngFor="let item of posts" >
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="row mb-2" *ngFor="let item of posts" >
+                <div class="col-lg-6">
+                    <a href="/chi-tiet-bai-viet/{{ item.id }}">
+                    <img  class="style-image" src="{{ item.img_src }}" width="100%" height="100">
+                  </a>
+                </div>
+                <div class="col-lg-6">
+                  <h4><a href="/chi-tiet-bai-viet/{{ item.id }}" style="color: black;">{{ item.title }}</a></h4>
+                    <ul>
+                        <li style="font-size: 14px;">
+                          <i  class="fa fa-calendar-o" ></i>{{ item.created_at|date:'dd/MM/yyyy' }}
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- <br> -->
+            </div>
+            <!-- </div> -->
+          </div>
+            <!-- <div class="col-lg-4 col-md-4 col-sm-6" *ngFor="let item of posts" >
                 <div class="blog__item">
                     <div class="blog__item__pic">
                         <img src="{{ item.img_src }}"width="350" height="300">
@@ -175,16 +247,13 @@ s
                     <div class="blog__item__text">
                         <ul>
                             <li><i class="fa fa-calendar-o"></i>{{ item.created_at|date:'dd/MM/yyyy' }}</li>
-                            <!-- <li><i class="fa fa-comment-o"></i> 5</li> -->
                         </ul>
                         <h5><a href="#">{{ item.title }}</a></h5>
-                        <!-- <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                            quaerat </p> -->
+
                         <a   href="/chi-tiet-bai-viet/{{ item.id }}" class="blog__btn">Đọc thêm <span class="arrow_right"></span></a>
-                        <!-- <a [routerLink]="['/chi-tiet-bai-viet/',item.id]"  href="['/chi-tiet-bai-viet/',item.id]" class="blog__btn">Đọc thêm <span class="arrow_right"></span></a> -->
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>
