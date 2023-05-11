@@ -52,7 +52,7 @@ export class DetailComponent implements OnInit {
 
       console.log('nef',data[0].images);
       this.product_detail = data;
-
+      
       this.detail_name = data[0].name;
       this.detail_price = data[0].default_price;
       this.detail_img_src = data[0].images[0].image;
