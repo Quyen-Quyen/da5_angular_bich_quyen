@@ -42,17 +42,18 @@ export class AdminService {
       }
     });
   }
-  create_cart(): Observable<any> {
-    return this._httpClient.get<any>(this.API_URL + 'cart-add/', {
+  create_cart(product_id:number, quantity:number): Observable<any> {
+    return this._httpClient.post<any>(this.API_URL + 'cart-add/', {
       headers: {
         Authorization: this.code_tokens
+        // Authorization: "15|asjPOcDUXa14BgISbNbhTR3RndukIcAwhg8c4W5x"
       }
     });
   }
 
 
 
-  
+
 
   getalluser(): Observable<any> {
     return this._httpClient.get<any>(this.API_URL + 'user/', {
@@ -123,34 +124,61 @@ export class AdminService {
       headers: {
         Authorization: this.code_tokens
       },
-      // {  var formData = new FormData(),
-      //   formData.append('file', this.postForm.value)
-      // }
-
     })
   }
   // Front end (user)
   get_index_product(): Observable<any> {
-    return this._httpClient.get<any>(this.API_URL + 'get_product/')};
+    return this._httpClient.get<any>(this.API_URL + 'get_product/', {
+      headers: {
+        Authorization: this.code_tokens
+      },
+    }
+    )};
  //detail dữ liệu theo id
  get_detail(id: number): Observable<any> {
-  return this._httpClient.get<any>(this.API_URL + 'get_product/' + id);
+  return this._httpClient.get<any>(this.API_URL + 'get_product/' + id
+  , {
+    headers: {
+      Authorization: this.code_tokens
+    },
+  });
 }
 // get video user
 get_index_video(): Observable<any> {
-  return this._httpClient.get<any>(this.API_URL + 'get_video/')};
+  return this._httpClient.get<any>(this.API_URL + 'get_video/'
+  , {
+    headers: {
+      Authorization: this.code_tokens
+    },
+  })};
 
   // get posts user
 get_index_posts(): Observable<any> {
-  return this._httpClient.get<any>(this.API_URL + 'get_posts/')};
+  return this._httpClient.get<any>(this.API_URL + 'get_posts/'
+  , {
+    headers: {
+      Authorization: this.code_tokens
+    },
+  }
+  )};
 
   // detail posts user
 get_detail_posts(id: number): Observable<any> {
-  return this._httpClient.get<any>(this.API_URL + 'get_posts/' + id);
+  return this._httpClient.get<any>(this.API_URL + 'get_posts/' + id
+  , {
+    headers: {
+      Authorization: this.code_tokens
+    },
+  });
 }
 
 get_product_by_cate(category: number): Observable<any> {
-  return this._httpClient.get<any>(this.API_URL + 'get_product_by_category?category='+ category);
+  return this._httpClient.get<any>(this.API_URL + 'get_product_by_category?category='+ category
+  , {
+    headers: {
+      Authorization: this.code_tokens
+    },
+  });
 }
 }
 
