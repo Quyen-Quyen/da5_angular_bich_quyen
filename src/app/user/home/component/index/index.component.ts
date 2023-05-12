@@ -127,5 +127,5 @@ export class IndexComponent implements OnInit {
 
 
 
-  // thêm sản phẩm vào giỏ hàng
+  // thêm sản phẩm vào giỏ hàng aaa
 }
