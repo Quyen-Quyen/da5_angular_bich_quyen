@@ -64,6 +64,7 @@ export class ProductComponent implements OnInit {
     this.getall_categories_section_begin();
     this.get_prodcut_by_cate();
     // this.get_product();
+    this.get_cart()
   }
   getall_categories_section_begin(){
     this.subscription = this.admin.get_index_product().subscribe((data:any)=>{
@@ -137,5 +138,31 @@ get_prodcut_by_cate(){
       alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!')
     }
   }
+        // thêm sản phẩm vào giỏ hàng
+        addProduct(product: any) {
+          const product_id = product.id;
+          const quantity = 1;
+          console.log('id',product.id);
+
+          // this.admin.create_cart(product_id :any ,quantity)
+          this.admin.create_cart(product_id,quantity).subscribe(
+            (data) => {
+              console.log('Đã thêm sản phẩm vào giỏ hàng');
+              // Xử lý thành công
+            },
+            (error) => {
+              console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
+              // Xử lý lỗi
+            }
+          );
+        }
+      datacart:any;
+        get_cart(){
+          // this.admin.get_all_product() .subscribe((data: any)
+          this.admin.getallcart().subscribe((data:any)=>{
+            this.datacart=data;
+            console.log(  'data giỏ hàng',this.datacart);
+          })
+        };
 
 }

@@ -44,3 +44,6 @@
 			cursor: pointer;
 		}
 
+    .style-image {
+      object-fit: cover;
+  }

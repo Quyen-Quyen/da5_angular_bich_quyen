@@ -26,6 +26,7 @@ export class DetailComponent implements OnInit {
   tech_specs: any;
   quantity: any;
   products:any[]=[];
+  imgage_all:any[]=[];
   // items:any;
   // totalquanlity: number=this.cartService.getcarttotalquanlity();
 
@@ -39,7 +40,7 @@ export class DetailComponent implements OnInit {
   ngOnInit() {
     this.get_detail();
 
-    this.get_all_product();
+    // this.get_all_product();
     console.log('dữ liệu đấy',this.product_detail)
     // this.cartService.loadCart();
     // this.items = this.cartService.getItems();
@@ -49,25 +50,27 @@ export class DetailComponent implements OnInit {
 
     this.subscription = this.admin.get_detail(this.id).subscribe((data: any) => {
 
-      console.log('nef',data[0].images[0].image);
+      console.log('nef',data[0].images);
       this.product_detail = data;
-
+      
       this.detail_name = data[0].name;
       this.detail_price = data[0].default_price;
       this.detail_img_src = data[0].images[0].image;
       this.detail_description = data[0].description;
       this.tech_specs = data[0].tech_specs;
       this.quantity = data[0].quantity;
+      this.imgage_all=data[0].images
 
       console.log('data,',this.product_detail);
     })
   }
-  get_all_product(){
-    this.subscription = this.admin.get_all_product().subscribe((data:any)=>{
-      console.log('chịu',data.product);
-      this.product_all=data.product;
-    })
-  }
+  // get_all_product(){
+  //   console.log('dataaaaa');
+  //   this.admin.get_all_product().subscribe((data:any)=>{
+  //     console.log('chịu',data.product);
+  //     this.product_all=data.product;
+  //   })
+  // }
 
 
 
