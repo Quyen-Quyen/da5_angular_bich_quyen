@@ -31,6 +31,29 @@ export class AdminService {
       },
     });
   }
+
+
+  //chức năng giỏ hàng
+  // danh sách sản phẩm của
+  getallcart(): Observable<any> {
+    return this._httpClient.get<any>(this.API_URL + 'cart/', {
+      headers: {
+        Authorization: this.code_tokens
+      }
+    });
+  }
+  create_cart(): Observable<any> {
+    return this._httpClient.get<any>(this.API_URL + 'cart-add/', {
+      headers: {
+        Authorization: this.code_tokens
+      }
+    });
+  }
+
+
+
+  
+
   getalluser(): Observable<any> {
     return this._httpClient.get<any>(this.API_URL + 'user/', {
       headers: {
