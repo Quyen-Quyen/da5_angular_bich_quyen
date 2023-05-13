@@ -42,15 +42,20 @@ export class AdminService {
       }
     });
   }
+  // create_cart(product_id:number, quantity:number): Observable<any> {
+  //   console.log('nè nè',this.code_tokens);
+  //   return this._httpClient.post<any>(this.API_URL + 'cart-add/', {
+  //     headers: {
+  //       Authorization: this.code_tokens
+  //       // Authorization: "15|asjPOcDUXa14BgISbNbhTR3RndukIcAwhg8c4W5x"
+  //     }
+  //   });
+  // }
   create_cart(product_id:number, quantity:number): Observable<any> {
-    return this._httpClient.post<any>(this.API_URL + 'cart-add/', {
-      headers: {
-        Authorization: this.code_tokens
-        // Authorization: "15|asjPOcDUXa14BgISbNbhTR3RndukIcAwhg8c4W5x"
-      }
-    });
+    const headers = { Authorization: this.code_tokens };
+    const body = { product_id, quantity };
+    return this._httpClient.post<any>(this.API_URL + 'cart-add/', body, { headers });
   }
-
 
 
 
