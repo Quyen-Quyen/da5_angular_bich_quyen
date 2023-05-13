@@ -7,6 +7,7 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
+import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -18,11 +19,14 @@ export class CartComponent implements OnInit {
   products:any[]=[];
   items:any = [];
   // subtotal :any;
-  constructor(    public cartService: CartService,
+  constructor(
+    public cartService: CartService,
+    private admin: AdminService,
     private currencyPipe: CurrencyPipe // private builder: FormBuilder
     ) { }
 
   ngOnInit(): void {
+    this.get_cart();
     // this.get_product();
     this.cartService.loadCart();
     this.items = this.cartService.getItems();
@@ -83,4 +87,15 @@ export class CartComponent implements OnInit {
         { qtyTotal: 1, default_price: 0 }
       ).price;
     }
+
+    info_product:any;
+    datacart:any;
+    get_cart(){
+      // this.admin.get_all_product() .subscribe((data: any)
+      this.admin.getallcart().subscribe((data:any)=>{
+        this.datacart=data;
+        this.info_product=data.cart_details
+        console.log(  'data giỏ hàng',this.info_product);
+      })
+    };
 }
