@@ -57,7 +57,28 @@ export class AdminService {
     return this._httpClient.post<any>(this.API_URL + 'cart-add/', body, { headers });
   }
 
+  update_quantity_cart(product_id: number, quantity: number): Observable<any> {
+    const headers = { Authorization: this.code_tokens };
+    const body = { quantity };
+    return this._httpClient.put<any>(this.API_URL + 'cart-update/' + product_id, body, { headers });
+  }
 
+  delete_product_cart(product_id:number): Observable<any>{
+    const headers = { Authorization: this.code_tokens };
+    const body = { product_id };
+    return this._httpClient.put<any>(this.API_URL + 'cart-remove/', body, { headers });
+  }
+  apply_voucher(voucherCode: string): Observable<any> {
+    const headers = { Authorization: this.code_tokens };
+    const body = { voucher_code: voucherCode };
+    return this._httpClient.post<any>(this.API_URL + 'apply-voucher', body, { headers });
+  }
+
+
+
+  // Route::put('/cart-update/{cartDetail}', [CartController::class, 'updateQuantity']);
+  // Route::delete('/cart-remove/{cartDetail}', [CartController::class, 'removeProduct']);
+  // Route::post('/apply-voucher', [CartController::class, 'applyVoucher']);
 
 
   getalluser(): Observable<any> {

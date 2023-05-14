@@ -39,7 +39,7 @@ export class IndexComponent implements OnInit {
     dots: false,
     // navText: ["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"],
     navSpeed: 700,
-    navText: ['<', '>'],
+    navText: ['', ''],
     responsive: {
       0: {
         items: 1,
