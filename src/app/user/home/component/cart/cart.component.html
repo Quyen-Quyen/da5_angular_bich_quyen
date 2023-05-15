@@ -67,6 +67,10 @@
                   <!-- {{subtotal(item)|currency:'VND'}} -->
                   {{ item.price_by_quantity  |currency:'VND'}}
                 </td>
+                <td class="shoping__cart__item__close">
+                  <span class="icon_close" (click)="removeProduct(item.id)"></span>
+              </td>
+
                 <!-- <img src="{{ item.product.name }}" alt="" [width]="100" [height]="100"> -->
                 <!-- <h5>{{ item.name }}</h5>
                                     </td>
@@ -148,7 +152,7 @@
           <hr>
 
           <ul>
-            <li>Thành tiền <span>{{ datacart.total_money  |currency:'VND'}}</span></li>
+            <li>Thành tiền <span>{{ datacart.real_money  |currency:'VND'}}</span></li>
             <!-- Order Total: -->
 
           </ul>

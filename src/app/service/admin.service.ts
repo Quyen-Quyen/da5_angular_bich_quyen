@@ -63,11 +63,11 @@ export class AdminService {
     return this._httpClient.put<any>(this.API_URL + 'cart-update/' + product_id, body, { headers });
   }
 
-  delete_product_cart(product_id:number): Observable<any>{
+  delete_product_cart(productId: number): Observable<any> {
     const headers = { Authorization: this.code_tokens };
-    const body = { product_id };
-    return this._httpClient.put<any>(this.API_URL + 'cart-remove/', body, { headers });
-  }
+    return this._httpClient.delete<any>(this.API_URL + 'cart-remove/' + productId, { headers });
+}
+
   apply_voucher(voucherCode: string): Observable<any> {
     const headers = { Authorization: this.code_tokens };
     const body = { voucher_code: voucherCode };

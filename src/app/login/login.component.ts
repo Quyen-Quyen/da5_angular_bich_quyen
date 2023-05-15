@@ -30,8 +30,10 @@ export class LoginComponent implements OnInit {
 
     this.apiService.login(this.form.value)
     .subscribe(data=>{
-       console.log(data);
-      this.router.navigate(['']);
+      //  console.log(data);
+      // this.router.navigate(['']);
+      window.location.href = '';
+      // window.location.reload();
     });
   }
 

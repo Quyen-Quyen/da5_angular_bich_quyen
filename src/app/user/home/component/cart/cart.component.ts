@@ -107,6 +107,7 @@ export class CartComponent implements OnInit {
             alert(response.message);
             // Xử lý thành công
             // console.log(response.message);
+            alert('Áp dụng voucher thành công!');
           },
           error => {
             // Xử lý lỗi
@@ -118,12 +119,14 @@ export class CartComponent implements OnInit {
 
     updateQuantity(item: any) {
       console.log('soluong',item.quantity);
-      this.admin.update_quantity_cart(item.product_id, item.quantity)
+      this.admin.update_quantity_cart(item.id, item.quantity)
         .subscribe(
           response => {
             // Hiển thị thông báo thành công bằng alert hoặc thông báo khác
             // console.log(response.message);
-            alert(response.message);
+
+            // alert(response.message);
+            this.get_cart();
           },
           error => {
             // Hiển thị thông báo lỗi bằng alert hoặc thông báo khác
@@ -132,6 +135,20 @@ export class CartComponent implements OnInit {
           }
         );
     }
+    removeProduct(item: any) {
+      console.log('id',item)
+      this.admin.delete_product_cart(item).subscribe(
+          response => {
+            this.get_cart();
+            // location.reload();
+              // Xóa sản phẩm khỏi danh sách hiển thị hoặc thực hiện các thao tác cần thiết
+          },
+          error => {
+              // Xử lý lỗi khi xóa sản phẩm
+          }
+      );
+  }
+
 
 
 }
