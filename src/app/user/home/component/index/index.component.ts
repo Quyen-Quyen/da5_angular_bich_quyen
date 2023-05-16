@@ -1,9 +1,11 @@
 // import { NgStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { CartService } from 'src/app/cart_Service/cart.service';
 import { AdminService } from 'src/app/service/admin.service';
 import { Router } from '@angular/router';
+import { AuthGuard } from 'src/app/auth.guard';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-index',
@@ -59,7 +61,9 @@ export class IndexComponent implements OnInit {
   constructor(
     private admin: AdminService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    // private authGuard: AuthGuard,
+    private authService: AuthService
   ) {}
   private subscription: Subscription;
   ngOnInit(): void {
@@ -69,8 +73,8 @@ export class IndexComponent implements OnInit {
     // gọi hàm loadCart() mới có dữ liệu cho hàm getItem()
     this.cartService.loadCart();
     // console.log( this.cartService.loadCart())
-    this.items = this.cartService.getItems();
-    console.log('haha', this.items);
+    // this.items = this.cartService.getItems();
+    // console.log('haha', this.items);
     // this.get_prodcut_by_cate();
   }
   getall_categories_section_begin() {
@@ -115,35 +119,30 @@ export class IndexComponent implements OnInit {
     this.getall_categories_section_begin();
   }
 
-  items: any = [];
-  addToCart(item: any) {
-    if (!this.cartService.itemInCart(item)) {
-      item.qtyTotal = 1;
-      this.cartService.addToCart(item); //add items in cart
-      this.items = [...this.cartService.getItems()];
-      this.getall_categories_section_begin();
-      alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!');
-    }
-  }
-
   // thêm sản phẩm vào giỏ hàng
   addProduct(product: any) {
+    // console.log('ahha',this.authService.islog)
+    this.authService.islog.subscribe((isLogged: boolean) => {
+      if (!isLogged) {
+        alert('Bạn cần đăng nhập để sử dụng tính năng này!');
+        this.router.navigate(['login']);
+        return;
+      }
     const product_id = product.id;
     const quantity = 1;
-    console.log('id', product.id);
 
-    // this.admin.create_cart(product_id :any ,quantity)
     this.admin.create_cart(product_id, quantity).subscribe(
       (data) => {
-        console.log('Đã thêm sản phẩm vào giỏ hàng');
-        // Xử lý thành công
+        alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!');
       },
       (error) => {
         console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
-        // Xử lý lỗi
       }
     );
+  });
   }
+
+
   datacart: any;
   get_cart() {
     // this.admin.get_all_product() .subscribe((data: any)

@@ -136,7 +136,7 @@
               <h5>Tổng tiền</h5>
             </div>
             <div class="col">
-              <span class="font-weight-bold" style="float: right;color: #FF3333;">{{ datacart.total_money  |currency:'VND'}}</span>
+              <span  *ngIf="datacart" class="font-weight-bold" style="float: right;color: #FF3333;">{{ datacart.total_money  |currency:'VND'}}</span>
             </div>
           </div>
           <div class="row">
@@ -145,14 +145,14 @@
               <h5>voucher</h5>
             </div>
             <div class="col">
-              <span class="font-weight-bold" style="float: right;color: #FF3333;">-{{ datacart.discounted_price|currency:'VND' }}</span>
+              <span *ngIf="datacart" class="font-weight-bold" style="float: right;color: #FF3333;">-{{ datacart.discounted_price|currency:'VND' }}</span>
             </div>
           </div>
 
           <hr>
 
           <ul>
-            <li>Thành tiền <span>{{ datacart.real_money  |currency:'VND'}}</span></li>
+            <li>Thành tiền <span *ngIf="datacart">{{ datacart.real_money  |currency:'VND'}}</span></li>
             <!-- Order Total: -->
 
           </ul>

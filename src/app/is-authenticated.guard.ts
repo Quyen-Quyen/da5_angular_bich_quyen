@@ -15,11 +15,11 @@ export class IsAuthenticatedGuard implements CanActivate {
       return this.authService.islog.pipe(
         tap((isLoggedIn:any)=>{
           if(!isLoggedIn){
-            alert("bạn cần đăng nhập để vào page này");
+            alert("bạn cần đăng nhập để vào trang này!");
             this.router.navigate(['login']);
           }
         })
       );
   }
-  
+
 }

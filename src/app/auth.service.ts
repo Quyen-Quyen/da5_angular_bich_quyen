@@ -14,20 +14,14 @@ islog = this._islog.asObservable();
 get token(){
   return localStorage.getItem(this.TOKEN_NAME)!;
 }
-constructor(private http: HttpClient,private apiService: AdminService) { 
+constructor(private http: HttpClient,private apiService: AdminService) {
   this._islog.next(!!this.token);
 }
 login(data:any){
   return this.apiService.login(data).pipe(
-
-
-    tap((respose:any)=>{
-       console.log('vao');
+   tap((respose:any)=>{
       this._islog.next(true);
       localStorage.setItem(this.TOKEN_NAME, respose.access_token);
-
-      console.log(respose.access_token);
-      console.log(this.TOKEN_NAME,respose.access_token);
     })
   )
 }

@@ -23,8 +23,6 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.get_cart();
   }
-
-
     info_product:any;
     datacart:any;
     voucherCode:any;
@@ -49,7 +47,7 @@ export class CartComponent implements OnInit {
           },
           error => {
             // Xử lý lỗi
-            alert('Có lỗi xảy ra khi áp dụng voucher');
+            alert('Mã không hợp lệ hoặc đã hết hạn!');
             // console.log(error);
           }
         );
