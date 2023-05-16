@@ -34,7 +34,7 @@ export class AdminService {
 
 
   //chức năng giỏ hàng
-  // danh sách sản phẩm của
+  // danh sách sản phẩm của giỏ hàng
   getallcart(): Observable<any> {
     return this._httpClient.get<any>(this.API_URL + 'cart/', {
       headers: {
@@ -74,6 +74,12 @@ export class AdminService {
     return this._httpClient.post<any>(this.API_URL + 'apply-voucher', body, { headers });
   }
 
+  // đơn hàng
+  create_order(data:any): Observable<any> {
+    const headers = { Authorization: this.code_tokens };
+    // const body = { product_id, quantity };
+    return this._httpClient.post<any>(this.API_URL + 'orders/', data, { headers });
+  }
 
 
   // Route::put('/cart-update/{cartDetail}', [CartController::class, 'updateQuantity']);
@@ -96,13 +102,13 @@ export class AdminService {
       }
     });
   }
-  create_order(data:any): Observable<any> {
-    return this._httpClient.post<any>(this.API_URL + 'order/',data, {
-      headers: {
-        Authorization: this.code_tokens
-      }
-    })
-  }
+  // create_order(data:any): Observable<any> {
+  //   return this._httpClient.post<any>(this.API_URL + 'order/',data, {
+  //     headers: {
+  //       Authorization: this.code_tokens
+  //     }
+  //   })
+  // }
   get_order(id: number): Observable<any> {
     return this._httpClient.get<any>(this.API_URL + 'order/' + id, {
       headers: {

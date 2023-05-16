@@ -60,6 +60,7 @@ const router_home:Routes=[
     {
       path:"thanh-toan",
       component:CheckoutComponent,
+      canActivate: [IsAuthenticatedGuard],
     },
     {
       path:"lien-he",

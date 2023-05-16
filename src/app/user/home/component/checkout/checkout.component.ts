@@ -17,25 +17,26 @@ export class CheckoutComponent implements OnInit {
   totall: any;
   items: any = [];
 
-  
-  test: any = [{
-    product_id: 123,
-    price: 222,
-    qtyTotal: 3
-  },
-  {
-    product_id: 122223,
-    price: 222,
-    qtyTotal: 3
-  }
-  ]
-  product_cart:any=[];
-  
+
+  // test: any = [{
+  //   product_id: 123,
+  //   price: 222,
+  //   qtyTotal: 3
+  // },
+  // {
+  //   product_id: 122223,
+  //   price: 222,
+  //   qtyTotal: 3
+  // }
+  // ]
+  // product_cart:any=[];
+
 
   ngOnInit() {
 
-    this.cartService.loadCart();
+    // this.cartService.loadCart();
     this.items = this.cartService.getItems();
+    this.get_cart();
     // console.log('itemmm checkout', this.items)
 
     // console.log('day ne', this.sumtotal)
@@ -46,14 +47,36 @@ export class CheckoutComponent implements OnInit {
 
   order_fromCreate: FormGroup = new FormGroup({
 
-    total_price: new FormControl(this.sumtotal),
-    name: new FormControl(),
-    date_of_birth: new FormControl(),
-    sex: new FormControl(),
-    email: new FormControl(),
-    adress: new FormControl(),
-    number_phone: new FormControl(),
-    order_product_list: new FormControl(this.product),
+    // total_price: new FormControl(this.sumtotal),
+    // name: new FormControl(),
+    // date_of_birth: new FormControl(),
+    // sex: new FormControl(),
+    // email: new FormControl(),
+    // adress: new FormControl(),
+    // number_phone: new FormControl(),
+    // order_product_list: new FormControl(this.product),
+
+    // 'customer_id' => $cart->customer_id,
+    // 'payment_method' => $cart->payment_method,
+    // 'total_money' => $cart->real_money,
+    // 'delivery_date' => $cart->delivery_date,
+    // 'shipping_fee' => $cart->shipping_fee,
+    // 'receiver_name' => $cart->receiver_name,
+    // 'receiver_address' => $cart->receiver_address,
+    // 'ward_id' => $cart->ward_id,
+    // 'districts_id' => $cart->districts_id,
+    // 'provinces_id' => $cart->provinces_id,
+    // 'status' => 1,
+
+    payment_method : new FormControl(),
+    // delivery_date : new FormControl(),
+    shipping_fee : new FormControl(),
+    receiver_name : new FormControl(),
+    number_phone : new FormControl(),
+    receiver_address : new FormControl(),
+    ward_id : new FormControl(),
+    districts_id : new FormControl(),
+    provinces_id : new FormControl(),
 
 
   });
@@ -62,58 +85,33 @@ export class CheckoutComponent implements OnInit {
 
 
     // console.log("item",this.test);
-    console.log("total_price",this.order_fromCreate.value.total_price)
-    console.log("order_product_list",this.order_fromCreate.value.order_product_list)
+    console.log("nêne",this.order_fromCreate.value)
+    // console.log("order_product_list",this.order_fromCreate.value.order_product_list)
     this.admin.create_order(this.order_fromCreate.value).subscribe((data: any) => {
       // this.admin.create_order(formData).subscribe((data: any) => {
         console.log('success', data)
-        alert('Cảm ơn Khách hàng: '+this.order_fromCreate.value.name+' đã đặt hàng!')
+        alert('Cảm ơn Khách hàng: '+this.order_fromCreate.value.receiver_name+' đã đặt hàng!')
         localStorage.removeItem('cart_items');
         this.router.navigate(['/']);
 
-      
+
     }
     )
   }
 
 
 
-  //tính tiền theo số lượng
-  subtotal(item: any) {
+  datacart:any;
+  product_carts:any;
+  get_cart(){
+    // this.admin.get_all_product() .subscribe((data: any)
+    this.admin.getallcart().subscribe((data:any)=>{
+      this.datacart=data;
+      this.product_carts=data.cart_details
 
-    return item.qtyTotal * item.price;
-  }
-
-  get product(){
-    this.cartService.loadCart();
-    // this.product_cart = this.cartService.getItems();
-    return this.product_cart=this.cartService.getItems();
-  }
-
-  //----- calculate total (tính tổng tiền của toàn bộ)
-  get total() {
-    return this.product.reduce(
-      (sum: any, x: any) => ({
-        qtyTotal: 1,
-        price: sum.price + x.qtyTotal * x.price,
-      }),
-      { qtyTotal: 1, price: 0 }
-    ).price;
-  }
-
-  // tổng tien + ship
-  get sumtotal() {
-    // console.log('total',this.total+25000)
-    return this.totall=this.product.reduce(
-      (sum: any, x: any) => ({
-        qtyTotal: 1,
-        price: this.total + 25000,
-      }),
-      { qtyTotal: 1, price: 0 }
-    ).price;
-  }
-
- 
+      console.log(  'data giỏ hàng',this.datacart);
+    })
+  };
 
 
 }
