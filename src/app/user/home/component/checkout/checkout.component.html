@@ -80,10 +80,10 @@
                                     Tổng tiền <span *ngIf="datacart"> {{ datacart.total_money|currency:'VND' }}</span></div>
                                 <br>
                                 <div>
-                                    Voucher<span> -{{ datacart.discounted_price|currency:'VND' }}</span>
+                                    Voucher<span *ngIf="datacart"> -{{ datacart.discounted_price|currency:'VND' }}</span>
                                   </div>
                             </div>
-                            <div class="checkout__order__total"  Value="sumtotal" >Thành tiền <span> {{ datacart.real_money|currency:'VND' }}</span>
+                            <div class="checkout__order__total"  Value="sumtotal" >Thành tiền <span *ngIf="datacart"> {{ datacart.real_money|currency:'VND' }}</span>
                             </div>
                           <button type="submit" class="site-btn" >Thanh toán</button>
                         </div>

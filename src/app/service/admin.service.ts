@@ -74,11 +74,11 @@ export class AdminService {
     return this._httpClient.post<any>(this.API_URL + 'apply-voucher', body, { headers });
   }
 
-  // đơn hàng
+  // đơn hàng thanh toán
   create_order(data:any): Observable<any> {
     const headers = { Authorization: this.code_tokens };
     // const body = { product_id, quantity };
-    return this._httpClient.post<any>(this.API_URL + 'orders/', data, { headers });
+    return this._httpClient.post<any>(this.API_URL + 'payment-order/', data, { headers });
   }
 
 

@@ -90,7 +90,7 @@ export class CheckoutComponent implements OnInit {
     this.admin.create_order(this.order_fromCreate.value).subscribe((data: any) => {
       // this.admin.create_order(formData).subscribe((data: any) => {
         console.log('success', data)
-        alert('Cảm ơn Khách hàng: '+this.order_fromCreate.value.receiver_name+' đã đặt hàng!')
+        alert('Cảm ơn Khách hàng: '+this.order_fromCreate.value.receiver_name+' đã tạo đơn hàng!')
         localStorage.removeItem('cart_items');
         this.router.navigate(['/']);
 
