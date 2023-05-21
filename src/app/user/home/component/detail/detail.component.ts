@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth.service';
 // import Swal from 'sweetalert2';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -32,6 +33,8 @@ export class DetailComponent implements OnInit {
   constructor(
     private admin: AdminService,
     private _router: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router,
     // private cartService: CartService
   ) { }
   private subscription: Subscription
@@ -78,26 +81,49 @@ export class DetailComponent implements OnInit {
       console.log('data giỏ hàng', this.datacart);
     });
   }
-  // thêm sản phẩm vào giỏ hàng
-  addProduct() {
-    const product_id = this.id = this._router.snapshot.params['id'];
-    const quantity = 1;
-    console.log('id', product_id);
+  // // thêm sản phẩm vào giỏ hàng
+  // addProduct() {
+  //   const product_id = this.id = this._router.snapshot.params['id'];
+  //   const quantity = 1;
+  //   console.log('id', product_id);
 
-    // this.admin.create_cart(product_id :any ,quantity)
-    this.admin.create_cart(product_id, quantity).subscribe(
-      (data) => {
-        console.log('Đã thêm sản phẩm vào giỏ hàng');
-        // Xử lý thành công
-      },
-      (error) => {
-        console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
-        // Xử lý lỗi
-      }
-    );
-  }
+  //   // this.admin.create_cart(product_id :any ,quantity)
+  //   this.admin.create_cart(product_id, quantity).subscribe(
+  //     (data) => {
+  //       console.log('Đã thêm sản phẩm vào giỏ hàng');
+  //       // Xử lý thành công
+  //     },
+  //     (error) => {
+  //       console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
+  //       // Xử lý lỗi
+  //     }
+  //   );
+  // }
 
+ // thêm sản phẩm vào giỏ hàng
+ addProduct() {
+  const product_id = this.id = this._router.snapshot.params['id'];
+  // console.log('ahha',this.authService.islog)
+  this.authService.islog.subscribe((isLogged: boolean) => {
+    if (!isLogged) {
+      alert('Bạn cần đăng nhập để sử dụng tính năng này!');
+      this.router.navigate(['login']);
+      return;
+    }
+  // const product_id = product.id;
+  console.log('day',this.product_id)
+  const quantity = 1;
 
+  this.admin.create_cart(product_id, quantity).subscribe(
+    (data) => {
+      alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!');
+    },
+    (error) => {
+      console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
+    }
+  );
+});
+}
   // items:any = [];
   // addToCart(item:any) {
   //   if (!this.cartService.itemInCart(item)) {

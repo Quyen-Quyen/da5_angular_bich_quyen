@@ -31,7 +31,7 @@ export class CartComponent implements OnInit {
       this.admin.getallcart().subscribe((data:any)=>{
         this.datacart=data;
         this.info_product=data.cart_details
-        console.log(  'data giỏ hàng',this.datacart);
+        // console.log(  'data giỏ hàng',this.datacart);
       })
     };
 
