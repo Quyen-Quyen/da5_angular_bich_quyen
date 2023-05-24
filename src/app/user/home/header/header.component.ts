@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   get_cart(){
     // this.admin.get_all_product() .subscribe((data: any)
     this.admin.getallcart().subscribe((data:any)=>{
-      this.itemIncart=data.cart_details.length;
+      // this.itemIncart=data.cart_details.length;
       // this.info_product=data.cart_details
       // console.log(  'data đếm số sản phẩm',this.itemIncart);
     })

@@ -15,6 +15,10 @@ export class BlogDetailComponent implements OnInit {
   content :any;
   img_src :any;
   type_post_id :any;
+  name_user:any;
+  name_category:any;
+  hashtag:any;
+  avatar:any;
 
   private subscription: Subscription;
   constructor(private admin : AdminService,private _router: ActivatedRoute ) { }
@@ -25,14 +29,16 @@ export class BlogDetailComponent implements OnInit {
   get_detail(){
     this.id = this._router.snapshot.params['id'];
     this.admin.get_detail_posts(this.id).subscribe((data:any) => {
-      console.log(data)
+      console.log('data nefff',data.posts[0])
       this.title =data.title;
-      this.type_post_id =data.type_post_id;
-      this.staff_id =data.staff_id;
-      this.content =data.content;
-      this.img_src =data.img_src;
-
-
+      this.type_post_id =data.posts[0].type_post_id;
+      this.staff_id =data.posts[0].staff_id;
+      this.content =data.posts[0].content;
+      this.img_src =data.posts[0].image;
+      this.name_user =data.posts[0].name_user;
+      this.name_category =data.posts[0].name;
+      this.hashtag =data.posts[0].hashtag;
+      this.avatar =data.posts[0].avatar;
     })
 
 }

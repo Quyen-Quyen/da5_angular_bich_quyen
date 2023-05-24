@@ -28,7 +28,7 @@ export class DetailComponent implements OnInit {
   products:any[]=[];
   imgage_all:any[]=[];
   // items:any;
-  // totalquanlity: number=this.cartService.getcarttotalquanlity();
+  product_related:any;
 
   constructor(
     private admin: AdminService,
@@ -41,15 +41,45 @@ export class DetailComponent implements OnInit {
 
   ngOnInit() {
     this.get_detail();
-
-    // this.get_all_product();
+    this.get_product_related();
     console.log('dữ liệu đấy',this.product_detail)
-    // this.cartService.loadCart();
-    // this.items = this.cartService.getItems();
+
+
+  }
+  customOptions: any = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    dots: false,
+    // navText: ["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"],
+    navSpeed: 700,
+    navText: ['<', '>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 4
+      },
+      1200: { // Thêm responsive cho hiển thị 5 ảnh
+        items: 5
+      },
+      1600: { // Thêm responsive cho hiển thị 6 ảnh
+        items: 6
+      }
+    },
+    nav: true
   }
   get_detail() {
     this.id = this._router.snapshot.params['id'];
-    // console.log('lấy id này',this.id);
+    console.log('lấy id này',this.id);
     this.subscription = this.admin.get_detail(this.id).subscribe((data: any) => {
 
       console.log('nef',data[0].images);
@@ -65,14 +95,22 @@ export class DetailComponent implements OnInit {
 
       console.log('data,',this.product_detail);
     })
+
   }
-  // get_all_product(){
-  //   console.log('dataaaaa');
-  //   this.admin.get_all_product().subscribe((data:any)=>{
-  //     console.log('chịu',data.product);
-  //     this.product_all=data.product;
-  //   })
-  // }
+get_product_related(){
+  // this.id=id,
+  this.subscription = this.admin.get_product(this.id).subscribe(
+    (data: any) => {
+
+      this.product_related = data.product_related;
+      // this.images=data.images;
+      console.log('data--', this.product_related);
+    },
+    (error) => {
+      console.log('data--111',error);
+    }
+    );
+}
   datacart: any;
   get_cart() {
     // this.admin.get_all_product() .subscribe((data: any)
@@ -81,24 +119,6 @@ export class DetailComponent implements OnInit {
       console.log('data giỏ hàng', this.datacart);
     });
   }
-  // // thêm sản phẩm vào giỏ hàng
-  // addProduct() {
-  //   const product_id = this.id = this._router.snapshot.params['id'];
-  //   const quantity = 1;
-  //   console.log('id', product_id);
-
-  //   // this.admin.create_cart(product_id :any ,quantity)
-  //   this.admin.create_cart(product_id, quantity).subscribe(
-  //     (data) => {
-  //       console.log('Đã thêm sản phẩm vào giỏ hàng');
-  //       // Xử lý thành công
-  //     },
-  //     (error) => {
-  //       console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
-  //       // Xử lý lỗi
-  //     }
-  //   );
-  // }
 
  // thêm sản phẩm vào giỏ hàng
  addProduct() {
@@ -124,13 +144,5 @@ export class DetailComponent implements OnInit {
   );
 });
 }
-  // items:any = [];
-  // addToCart(item:any) {
-  //   if (!this.cartService.itemInCart(item)) {
-  //     item.qtyTotal = 1;
-  //     this.cartService.addToCart(item); //add items in cart
-  //     this.items = [...this.cartService.getItems()];
-  //     alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!')
-  //   }
-  // }
+
 }

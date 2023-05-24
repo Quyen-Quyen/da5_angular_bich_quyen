@@ -152,7 +152,7 @@ export class AdminService {
     })
   }
   get_product(id: number): Observable<any> {
-    return this._httpClient.get<any>(this.API_URL + 'product/' + id, {
+    return this._httpClient.get<any>(this.API_URL + 'products/' + id, {
       headers: {
         Authorization: this.code_tokens
       },
@@ -212,6 +212,7 @@ get_product_by_cate(category: number): Observable<any> {
     },
   });
 }
+
 }
 
 

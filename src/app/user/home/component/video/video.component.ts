@@ -11,13 +11,13 @@ import { AdminService } from 'src/app/service/admin.service';
 export class VideoComponent implements OnInit {
   video :any;
   type_video: any;
-
+  searchText:any;
     //phân trang
   // POSTS: any;
   page: number = 1;
   count: number = 0;
   tableSize: number = 2;
-  tableSizes: any = [5, 10, 15, 20];
+  tableSizes: any = [2, 10, 15, 20];
   //end
 
   constructor(private admin : AdminService) { }
@@ -26,10 +26,10 @@ export class VideoComponent implements OnInit {
   ngOnInit() {
     this.get_video();
   }
-  
+
   get_video(){
     this.subscription = this.admin.get_index_video().subscribe((data:any)=>{
-      console.log(data.video);
+      console.log('video',data.video);
       console.log(data.type_video);
       this.video = data.video;
       this.type_video = data.type_video;

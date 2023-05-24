@@ -19,6 +19,7 @@ import { CheckoutComponent } from './home/component/checkout/checkout.component'
 import { ContactComponent } from './home/component/contact/contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IsAuthenticatedGuard } from '../is-authenticated.guard';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 // import { SanitizeHtmlPipe } from '../share/pipe/sanitize-html.pipe';
 // import { ReactiveFormsModule } from '@angular/forms';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -94,6 +95,7 @@ const router_home:Routes=[
     // BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    Ng2SearchPipeModule,
     NgxPaginationModule,
     RouterModule.forChild(router_home),
     CarouselModule

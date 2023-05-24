@@ -10,7 +10,7 @@ import { AdminService } from 'src/app/service/admin.service';
 export class BlogComponent implements OnInit {
   posts :any;
   type_posts: any;
-
+  searchText:any;
     //phân trang
   // POSTS: any;
   page: number = 1;
@@ -25,11 +25,11 @@ export class BlogComponent implements OnInit {
   ngOnInit() {
     this.get_posts();
   }
-  
-  
+
+
   get_posts(){
     this.subscription = this.admin.get_index_posts().subscribe((data:any)=>{
-      console.log(data.posts);
+      console.log('post',data.posts);
       console.log(data.type_posts);
       this.posts = data.posts;
       this.type_posts = data.type_posts;
