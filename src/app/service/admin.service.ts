@@ -213,6 +213,11 @@ get_product_by_cate(category: number): Observable<any> {
   });
 }
 
+  //banner
+  get_banner(): Observable<any> {
+    return this._httpClient.get<any>(this.API_URL + 'banner-slide/');
+  }
+
 }
 
 

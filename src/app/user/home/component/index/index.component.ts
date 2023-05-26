@@ -71,6 +71,7 @@ export class IndexComponent implements OnInit {
     this.get_posts();
     this.get_cart();
     // gọi hàm loadCart() mới có dữ liệu cho hàm getItem()
+    this.get_banner();
     this.cartService.loadCart();
     // console.log( this.cartService.loadCart())
     // this.items = this.cartService.getItems();
@@ -107,7 +108,20 @@ export class IndexComponent implements OnInit {
       }
     );
   }
-
+  banner:any;
+  get_banner(){
+    this.admin.get_banner().subscribe(
+      (data: any) => {
+        // console.log(data.type_posts);
+        this.banner = data.banner.image;
+        // console.log('ảnh11111', data.banner.image);
+        // this.type_posts = data.type_posts;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
   //phân trang
   ontableDataChange(event: any) {
     this.page = event;
