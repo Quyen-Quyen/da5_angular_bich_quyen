@@ -134,28 +134,54 @@ export class IndexComponent implements OnInit {
   }
 
   // thêm sản phẩm vào giỏ hàng
+  // addProduct(product: any) {
+  //   // console.log('ahha',this.authService.islog)
+  //   this.authService.islog.subscribe((isLogged: boolean) => {
+  //     if (!isLogged) {
+  //       alert('Bạn cần đăng nhập để sử dụng tính năng này!');
+  //       this.router.navigate(['login']);
+  //       return;
+  //     }
+  //   const product_id = product.id;
+  //   const quantity = 1;
+
+  //   this.admin.create_cart(product_id, quantity).subscribe(
+  //     (data) => {
+  //       alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!');
+  //     },
+  //     (error) => {
+  //       console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
+  //     }
+  //   );
+  // });
+  // }
+  // thêm sản phẩm vào giỏ hàng
   addProduct(product: any) {
-    // console.log('ahha',this.authService.islog)
     this.authService.islog.subscribe((isLogged: boolean) => {
       if (!isLogged) {
         alert('Bạn cần đăng nhập để sử dụng tính năng này!');
         this.router.navigate(['login']);
         return;
       }
-    const product_id = product.id;
-    const quantity = 1;
 
-    this.admin.create_cart(product_id, quantity).subscribe(
-      (data) => {
-        alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!');
-      },
-      (error) => {
-        console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
+      if (product.quantity == 0 || product.quantity == null) {
+        alert('Sản phẩm đã hết hàng');
+        return;
       }
-    );
-  });
-  }
 
+      const product_id = product.id;
+      const quantity = 1;
+
+      this.admin.create_cart(product_id, quantity).subscribe(
+        (data) => {
+          alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!');
+        },
+        (error) => {
+          console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
+        }
+      );
+    });
+  }
 
   datacart: any;
   get_cart() {

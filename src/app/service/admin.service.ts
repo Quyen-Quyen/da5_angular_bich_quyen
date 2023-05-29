@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 // import { testapi, users } from '../models/admin';
-
+import { HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -152,11 +152,13 @@ export class AdminService {
     })
   }
   get_product(id: number): Observable<any> {
-    return this._httpClient.get<any>(this.API_URL + 'products/' + id, {
-      headers: {
-        Authorization: this.code_tokens
-      },
-    })
+    return this._httpClient.get<any>(this.API_URL + 'products/' + id
+    // , {
+    //   headers: {
+    //     Authorization: this.code_tokens
+    //   },
+    // }
+    )
   }
   // Front end (user)
   get_index_product(): Observable<any> {
@@ -216,6 +218,22 @@ get_product_by_cate(category: number): Observable<any> {
   //banner
   get_banner(): Observable<any> {
     return this._httpClient.get<any>(this.API_URL + 'banner-slide/');
+  }
+  //filter
+  get_filter_products(category_id?: number, min_price?: number, max_price?: number): Observable<any> {
+    let params = new HttpParams();
+
+    if (category_id) {
+      params = params.set('category_id', category_id.toString());
+    }
+    if (min_price) {
+      params = params.set('min_price', min_price.toString());
+    }
+    if (max_price) {
+      params = params.set('max_price', max_price.toString());
+    }
+
+    return this._httpClient.get<any>(this.API_URL + 'filter_products/', { params });
   }
 
 }

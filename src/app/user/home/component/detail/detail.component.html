@@ -1,4 +1,4 @@
-<section class="breadcrumb-section set-bg" style="background-image: url('http://127.0.0.1:8000/storage/image/product/{{detail_img_src}}')">
+<!-- <section class="breadcrumb-section set-bg" style="background-image: url('http://127.0.0.1:8000/storage/image/product/{{detail_img_src}}')">
   <div class="container">
       <div class="row">
           <div class="col-lg-12 text-center">
@@ -7,27 +7,17 @@
                   <div class="breadcrumb__option">
                       <a  style="color: black;" href="">Trang chủ</a>/
                       <a  style="color: black;" [routerLink]="['/san-pham/',id]">{{detail_name}}</a>
-                      <!-- <span>Vegetable’s Package</span> -->
                   </div>
               </div>
           </div>
       </div>
   </div>
-</section>
+</section> -->
 <hr style="color: black;">
 <section class="product-details spad">
   <div class="container">
-      <!-- <div class="row"  *ngFor="let item of product_detail"> -->
       <div class="row"  >
-          <!-- <div class="col-lg-6 col-md-6">
-              <div class="product__details__pic">
-                  <div class="product__details__pic__item">
 
-                      <img [src]="'http://127.0.0.1:8000/storage/image/product/'+detail_img_src" alt="" >
-
-                  </div>
-              </div>
-          </div> -->
           <div class="col-lg-6 col-md-6">
             <div class="product__details__pic">
                 <div class="product__details__pic__item">
@@ -139,8 +129,7 @@
                       <div class="product__discount__item__text">
                           <span>Dried Fruit</span>
                           <h5><a [routerLink]="['/san-pham/',slide.id]">{{ slide.name }}</a></h5>
-                          <div class="product__item__price" style="color: red;">{{ slide.price |currency:'VND'}} <span>{{
-                                  slide.default_price }}</span></div>
+                          <div class="product__item__price" style="color: red;">{{ slide.default_price |currency:'VND'}} </div>
                       </div>
                   </div>
 
