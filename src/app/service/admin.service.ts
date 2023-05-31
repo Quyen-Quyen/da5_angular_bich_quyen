@@ -21,8 +21,8 @@ export class AdminService {
   login(data: any): Observable<any> {
     return this._httpClient.post<any>(this.API_URL + 'customer-login', data);
   }
-  register(data:any): Observable<any> {
-    return this._httpClient.post<any>(this.API_URL + 'register_customer',data);
+  register(data: any): Observable<any> {
+    return this._httpClient.post<any>(this.API_URL + 'register_customer', data);
   }
   logout(): Observable<any> {
     return this._httpClient.get<any>(this.API_URL + 'logout', {
@@ -51,11 +51,12 @@ export class AdminService {
   //     }
   //   });
   // }
-  create_cart(product_id:number, quantity:number): Observable<any> {
+  create_cart(product_id: number, quantity: number, selectedSize: number, selectedColor: number): Observable<any> {
     const headers = { Authorization: this.code_tokens };
-    const body = { product_id, quantity };
+    const body = { product_id, quantity, size_id: selectedSize, color_id: selectedColor };
     return this._httpClient.post<any>(this.API_URL + 'cart-add/', body, { headers });
   }
+
 
   update_quantity_cart(product_id: number, quantity: number): Observable<any> {
     const headers = { Authorization: this.code_tokens };
@@ -66,7 +67,7 @@ export class AdminService {
   delete_product_cart(productId: number): Observable<any> {
     const headers = { Authorization: this.code_tokens };
     return this._httpClient.delete<any>(this.API_URL + 'cart-remove/' + productId, { headers });
-}
+  }
 
   apply_voucher(voucherCode: string): Observable<any> {
     const headers = { Authorization: this.code_tokens };
@@ -75,7 +76,7 @@ export class AdminService {
   }
 
   // đơn hàng thanh toán
-  create_order(data:any): Observable<any> {
+  create_order(data: any): Observable<any> {
     const headers = { Authorization: this.code_tokens };
     // const body = { product_id, quantity };
     return this._httpClient.post<any>(this.API_URL + 'payment-order/', data, { headers });
@@ -94,14 +95,48 @@ export class AdminService {
       }
     });
   }
-   //order
-   get_all_order(): Observable<any> {
-    return this._httpClient.get<any>(this.API_URL + 'order/', {
+  //order đơn hàng theo tài khoản
+  get_order_customer(status: number): Observable<any> {
+    return this._httpClient.get<any>(this.API_URL + 'order_customer/' + status, {
       headers: {
         Authorization: this.code_tokens
       }
     });
   }
+  // chi tiết đơn hàng
+  get_order_id(id: number): Observable<any> {
+    return this._httpClient.get<any>(this.API_URL + 'order_customer_detail/' + id, {
+      headers: {
+        Authorization: this.code_tokens,
+      },
+    });
+  }
+  update_order_status(id: number, status: number): Observable<any> {
+    const body = { status: status };
+    return this._httpClient.put<any>(this.API_URL + 'update_status_order_customer/' + id, body, {
+      headers: {
+        Authorization: this.code_tokens,
+      },
+    });
+  }
+  //     // đơn giao thành công
+  // get_order_success(): Observable<any> {
+  //   return this._httpClient.get<any>(this.API_URL + 'order_customer_success/', {
+  //     headers: {
+  //       Authorization: this.code_tokens,
+  //     },
+  //   });
+  // }
+
+  // // đơn hủy
+  // get_order_cancel(): Observable<any> {
+  //   return this._httpClient.get<any>(this.API_URL + 'order_customer_cancel/', {
+  //     headers: {
+  //       Authorization: this.code_tokens,
+  //     },
+  //   });
+  // }
+
   // create_order(data:any): Observable<any> {
   //   return this._httpClient.post<any>(this.API_URL + 'order/',data, {
   //     headers: {
@@ -135,8 +170,8 @@ export class AdminService {
   }
 
 
-   //product
-   get_all_product(): Observable<any> {
+  //product
+  get_all_product(): Observable<any> {
     return this._httpClient.get<any>(this.API_URL + 'product/', {
       headers: {
         Authorization: this.code_tokens
@@ -144,8 +179,8 @@ export class AdminService {
     });
   }
   //them sản phẩm
-  create_product(data:any): Observable<any> {
-    return this._httpClient.post<any>(this.API_URL + 'product/',data,{
+  create_product(data: any): Observable<any> {
+    return this._httpClient.post<any>(this.API_URL + 'product/', data, {
       headers: {
         Authorization: this.code_tokens
       }
@@ -153,67 +188,72 @@ export class AdminService {
   }
   get_product(id: number): Observable<any> {
     return this._httpClient.get<any>(this.API_URL + 'products/' + id
-    // , {
-    //   headers: {
-    //     Authorization: this.code_tokens
-    //   },
-    // }
+      // , {
+      //   headers: {
+      //     Authorization: this.code_tokens
+      //   },
+      // }
     )
   }
   // Front end (user)
   get_index_product(): Observable<any> {
     return this._httpClient.get<any>(this.API_URL + 'get_product/', {
-      headers: {
-        Authorization: this.code_tokens
-      },
+      // headers: {
+      //   Authorization: this.code_tokens
+      // },
     }
-    )};
- //detail dữ liệu theo id
- get_detail(id: number): Observable<any> {
-  return this._httpClient.get<any>(this.API_URL + 'get_product/' + id
-  , {
-    headers: {
-      Authorization: this.code_tokens
-    },
-  });
-}
-// get video user
-get_index_video(): Observable<any> {
-  return this._httpClient.get<any>(this.API_URL + 'get_video/'
-  , {
-    headers: {
-      Authorization: this.code_tokens
-    },
-  })};
+    )
+  };
+  //detail dữ liệu theo id
+  get_detail(id: number): Observable<any> {
+    return this._httpClient.get<any>(this.API_URL + 'get_product/' + id
+      // , {
+      //   headers: {
+      //     Authorization: this.code_tokens
+      //   },
+      // }
+      );
+  }
+  // get video user
+  get_index_video(): Observable<any> {
+    return this._httpClient.get<any>(this.API_URL + 'get_video/'
+      , {
+        headers: {
+          Authorization: this.code_tokens
+        },
+      })
+  };
 
   // get posts user
-get_index_posts(): Observable<any> {
-  return this._httpClient.get<any>(this.API_URL + 'get_posts/'
-  , {
-    headers: {
-      Authorization: this.code_tokens
-    },
-  }
-  )};
+  get_index_posts(): Observable<any> {
+    return this._httpClient.get<any>(this.API_URL + 'get_posts/'
+      , {
+        headers: {
+          Authorization: this.code_tokens
+        },
+      }
+    )
+  };
+
 
   // detail posts user
-get_detail_posts(id: number): Observable<any> {
-  return this._httpClient.get<any>(this.API_URL + 'get_posts/' + id
-  , {
-    headers: {
-      Authorization: this.code_tokens
-    },
-  });
-}
+  get_detail_posts(id: number): Observable<any> {
+    return this._httpClient.get<any>(this.API_URL + 'get_posts/' + id
+      , {
+        headers: {
+          Authorization: this.code_tokens
+        },
+      });
+  }
 
-get_product_by_cate(category: number): Observable<any> {
-  return this._httpClient.get<any>(this.API_URL + 'get_product_by_category?category='+ category
-  , {
-    headers: {
-      Authorization: this.code_tokens
-    },
-  });
-}
+  get_product_by_cate(category: number): Observable<any> {
+    return this._httpClient.get<any>(this.API_URL + 'get_product_by_category?category=' + category
+      , {
+        headers: {
+          Authorization: this.code_tokens
+        },
+      });
+  }
 
   //banner
   get_banner(): Observable<any> {
@@ -235,7 +275,16 @@ get_product_by_cate(category: number): Observable<any> {
 
     return this._httpClient.get<any>(this.API_URL + 'filter_products/', { params });
   }
-
+  //thông tin liên hệ
+  get_store_information(): Observable<any> {
+    return this._httpClient.get<any>(this.API_URL + 'store_information_customer/'
+      , {
+        headers: {
+          Authorization: this.code_tokens
+        },
+      }
+    )
+  };
 }
 
 

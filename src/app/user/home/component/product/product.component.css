@@ -1,0 +1,12 @@
+.hero__categories ul li a {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.hero__categories ul li a:hover {
+  color: #007BFF; /* Màu sắc khi hover */
+}
+
+.hero__categories ul li a.active {
+  color: #FF4500; /* Màu sắc khi click (đánh dấu) */
+}

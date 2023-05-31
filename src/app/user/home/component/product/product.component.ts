@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth.service';
 import { CartService } from 'src/app/cart_Service/cart.service';
 import { AdminService } from 'src/app/service/admin.service';
+import { Options, LabelType } from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-product',
@@ -22,7 +23,7 @@ export class ProductComponent implements OnInit {
   product_by_category_3: any;
   product_by_category_4: any;
 
-
+  brand:any;
   // list_product:any;
 
   //phân trang
@@ -70,8 +71,6 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.getall_prduct();
     this.getall_categories_section_begin();
-    this.get_prodcut_by_cate();
-    // this.get_product();
     this.get_cart()
     this.get_filter_products();
   }
@@ -83,34 +82,23 @@ export class ProductComponent implements OnInit {
       this.count_product = data.count_product;
       this.category_limit = data.category_limit;
       console.log('aaall', this.all_product)
-      // var id = data.category_limit.params['id'];
-      // console.log('lấy đc',+data.category_limit.params['id'])
     }, error => {
       console.log(error);
     }
     )
   }
+
+
   getall_prduct() {
     this.subscription = this.admin.get_index_product().subscribe((data: any) => {
       console.log(data);
       console.log(data.category);
-      // this.categories_section_begin=data.product;
       this.category = data.category;
-      // this.show_by_cate_product=data.show_by_cate_product;
-      // this.all_product=data.all_product;
+      this.brand=data.brand;
     }, error => {
       console.log(error);
     }
     )
-  }
-  get_prodcut_by_cate() {
-    this.subscription = this.admin.get_product_by_cate(this.cate).subscribe((data: any) => {
-      console.log('cate ===', data.show_by_cate_product_4);
-      this.product_by_category_1 = data.show_by_cate_product_1;
-      this.product_by_category_2 = data.show_by_cate_product_2;
-      this.product_by_category_3 = data.show_by_cate_product_3;
-      this.product_by_category_4 = data.show_by_cate_product_4;
-    })
   }
   //phân trang
   ontableDataChange(event: any) {
@@ -139,39 +127,53 @@ export class ProductComponent implements OnInit {
       const product_id = product.id;
       const quantity = 1;
 
-      this.admin.create_cart(product_id, quantity).subscribe(
-        (data) => {
-          alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!');
-        },
-        (error) => {
-          console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
-        }
-      );
+      // this.admin.create_cart(product_id, quantity).subscribe(
+      //   (data) => {
+      //     alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!');
+      //   },
+      //   (error) => {
+      //     console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
+      //   }
+      // );
     });
   }
 
   datacart: any;
   get_cart() {
-    // this.admin.get_all_product() .subscribe((data: any)
     this.admin.getallcart().subscribe((data: any) => {
       this.datacart = data;
       console.log('data giỏ hàng', this.datacart);
     })
   };
-  category_id: number;
-  min_price: number;
-  max_price: number;
-  filter_products:any;
-  get_filter_products(){
 
-    this.admin.get_filter_products(this.category_id, this.min_price, this.max_price)
-    .subscribe(data => {
-      this.filter_products=data;
-      console.log('filter',this.filter_products)
-    }, error => {
-      // Xử lý lỗi tại đây
-    });
+
+// lọc sản phẩm
+  min_price: number = 0;
+  max_price: number = 200000000;
+
+  // chọn giá
+  options: Options = {
+    floor: 0,
+    ceil: 50000000,
+  };
+  selectedCategory: number;
+  category_id: number;
+  filter_products: any;
+
+  selectCategory(index: number) {
+    this.selectedCategory = index;
   }
 
+  get_filter_products(category_id?: number) {
+    if (category_id !== undefined) {
+      this.category_id = category_id;
+    }
+    this.admin.get_filter_products(this.category_id, this.min_price, this.max_price)
+      .subscribe(data => {
+        this.filter_products = data;
+        console.log('filter', this.filter_products)
+      }, error => {
+      });
+  }
 
 }

@@ -27,6 +27,8 @@ export class DetailComponent implements OnInit {
   quantity: any;
   products:any[]=[];
   imgage_all:any[]=[];
+  sizes:any[]=[];
+  colors:any[]=[];
   // items:any;
   product_related:any;
 
@@ -92,6 +94,8 @@ export class DetailComponent implements OnInit {
       this.tech_specs = data[0].tech_specs;
       this.quantity = data[0].quantity;
       this.imgage_all=data[0].images
+      this.sizes=data[0].sizes
+      this.colors=data[0].colors
 
       console.log('data,',this.product_detail);
     })
@@ -119,31 +123,8 @@ get_product_related(){
       console.log('data giỏ hàng', this.datacart);
     });
   }
-
- // thêm sản phẩm vào giỏ hàng
-//  addProduct() {
-//   const product_id = this.id = this._router.snapshot.params['id'];
-//   // console.log('ahha',this.authService.islog)
-//   this.authService.islog.subscribe((isLogged: boolean) => {
-//     if (!isLogged) {
-//       alert('Bạn cần đăng nhập để sử dụng tính năng này!');
-//       this.router.navigate(['login']);
-//       return;
-//     }
-//   // const product_id = product.id;
-//   console.log('day',this.product_id)
-//   const quantity = 1;
-
-//   this.admin.create_cart(product_id, quantity).subscribe(
-//     (data) => {
-//       alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!');
-//     },
-//     (error) => {
-//       console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
-//     }
-//   );
-// });
-// }
+  selectedSize:number;
+  selectedColor:number;
 // thêm sản phẩm vào giỏ hàng
 addProduct() {
   const product_id = this.id = this._router.snapshot.params['id'];
@@ -157,6 +138,8 @@ addProduct() {
   // const product_id = product.id;
   console.log('day',this.product_id)
   const quantity = 1;
+  const selectedSize = this.selectedSize; // Lấy giá trị size đã chọn từ phần giao diện
+    const selectedColor = this.selectedColor; // Lấy giá trị color đã chọn từ phần giao diện
 
   // Kiểm tra nếu số lượng sản phẩm là 0
   if (this.quantity == 0 || this.quantity == null) {
@@ -164,7 +147,7 @@ addProduct() {
     return;
   }
 
-  this.admin.create_cart(product_id, quantity).subscribe(
+  this.admin.create_cart(product_id, quantity, selectedSize, selectedColor).subscribe(
     (data) => {
       alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!');
     },

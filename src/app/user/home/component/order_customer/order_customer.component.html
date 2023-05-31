@@ -1,0 +1,436 @@
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="./assets/image/banner/banner_order.jpg">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <div class="breadcrumb__text">
+                      <h2>Đơn hàng của bạn</h2>
+                      <div class="breadcrumb__option">
+                          <a href="">Trang chủ</a>
+                          <span>Đơn hàng</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+<section class="shoping-cart spad">
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="product__details__tab">
+              <ul class="nav nav-tabs" role="tablist">
+                <!-- <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#tabs-0" role="tab"
+                      aria-selected="true" (click)="status = 1; get_order()">Xem đơn hàng</a>
+              </li> -->
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#tabs-1" role="tab"
+                          aria-selected="true" (click)="status = 1; get_order()">Đơn hàng đang xử lý</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                          aria-selected="true" (click)="status = 2; get_order()">Đơn hàng đã xử lý </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                          aria-selected="true" (click)="status = 3; get_order()">Đơn hàng đang giao</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab"
+                          aria-selected="true" (click)="status = 4; get_order()">Đơn hàng đã thành công</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#tabs-5" role="tab"
+                          aria-selected="true" (click)="status = 5; get_order()">Đơn hàng đã hủy</a>
+                  </li>
+                  <!-- <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                          aria-selected="false">Thông tin</a>
+                  </li> -->
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="tabs-0" role="tabpanel">
+                  <div class="product__details__tab__desc">
+                  </div>
+                </div>
+                <!-- Đơn hàng đang xử lý -->
+                  <div class="tab-pane" id="tabs-1" role="tabpanel">
+                      <div class="product__details__tab__desc">
+                          <h6>Đơn hàng đang xử lý</h6>
+                          <div class="col-lg-12">
+                            <div class="shoping__cart__table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="col-lg-3">Mã đơn hàng</th>
+                                            <th class="col-lg-3">Trạng thái đơn hàng</th>
+                                            <th class="col-lg-2">Dự tính ngày nhận</th>
+                                            <th class="col-lg-2">Thao tác</th>
+                                            <th class="col-lg-2">Hủy đơn</th>
+                                            <!-- <th></th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of order">
+                                            <td class="shoping__cart__price">
+                                                <h5>{{ item.code_order }}</h5>
+                                            </td>
+                                            <td class="shoping__cart__price">
+                                              <div class="status-content" [ngStyle]="getStatusStyle(item.status)">{{ getStatusText(item.status) }}</div>
+                                            </td>
+                                            <td class="shoping__cart__quantity">
+                                              {{ item.delivery_date | date:'dd-MM-yyyy'}}
+                                            </td>
+                                            <td class="shoping__cart__total">
+                                              <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" (click)="get_order_id(item.id)"
+                                              data-bs-target="#model_detail"  title="Xem chi tiết đơn hàng">
+                                              <i style="font-size: 20px;" class="fas fa-eye"></i>
+                                            </button>
+                                            </td>
+                                            <td>
+                                              <button type="button" class="btn btn-close" data-bs-toggle="modal" data-bs-target="#Modal_cancel" title="Hủy đơn"
+                                              (click)="openModal(item.id)">
+                                              <!-- hủy đơn -->
+                                              <!-- <i style="font-size: 20px;" class="far fa-window-close"></i> -->
+                                            </button>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- đơn hàng đã xử lý -->
+                  <div class="tab-pane " id="tabs-2" role="tabpanel">
+                      <div class="product__details__tab__desc">
+                          <h6>Đơn hàng đã xử lý</h6>
+                          <div class="col-lg-12">
+                            <div class="shoping__cart__table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="col-lg-3">Mã đơn hàng</th>
+                                            <th class="col-lg-3">Trạng thái đơn hàng</th>
+                                            <th class="col-lg-2">Dự tính ngày nhận</th>
+                                            <th class="col-lg-2">Thao tác</th>
+                                            <th class="col-lg-2">Hủy đơn</th>
+                                            <!-- <th></th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of order">
+                                            <td class="shoping__cart__price">
+                                                <h5>{{ item.code_order }}</h5>
+                                            </td>
+                                            <td class="shoping__cart__price">
+                                              <div class="status-content" [ngStyle]="getStatusStyle(item.status)">{{ getStatusText(item.status) }}</div>
+                                            </td>
+                                            <td class="shoping__cart__quantity">
+                                              {{ item.delivery_date | date:'dd-MM-yyyy'}}
+                                            </td>
+                                            <td class="shoping__cart__total">
+                                              <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" (click)="get_order_id(item.id)"
+                                              data-bs-target="#model_detail"  title="Xem chi tiết đơn hàng">
+                                              <i style="font-size: 20px;" class="fas fa-eye"></i>
+                                            </button>
+                                            </td>
+                                            <td>
+                                              <button type="button" class="btn btn-close" data-bs-toggle="modal" data-bs-target="#Modal_cancel" title="Hủy đơn"
+                                              (click)="openModal(item.id)">
+                                              <!-- hủy đơn -->
+                                              <!-- <i style="font-size: 20px;" class="far fa-window-close"></i> -->
+                                            </button>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- đơn hàng đang giao -->
+                  <div class="tab-pane" id="tabs-3" role="tabpanel">
+                      <div class="product__details__tab__desc">
+                          <h6>Đơn hàng đang giao</h6>
+                          <div class="col-lg-12">
+                            <div class="shoping__cart__table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                          <th class="col-lg-3">Mã đơn hàng</th>
+                                          <th class="col-lg-3">Trạng thái đơn hàng</th>
+                                          <th class="col-lg-2">Dự tính ngày nhận</th>
+                                          <th class="col-lg-2">Thao tác</th>
+                                          <th class="col-lg-2">Hủy đơn</th>
+                                            <!-- <th></th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of order">
+                                            <td class="shoping__cart__price">
+                                                <h5>{{ item.code_order }}</h5>
+                                            </td>
+                                            <td class="shoping__cart__price">
+                                              <div class="status-content" [ngStyle]="getStatusStyle(item.status)">{{ getStatusText(item.status) }}</div>
+                                            </td>
+                                            <td class="shoping__cart__quantity">
+                                              {{ item.delivery_date | date:'dd-MM-yyyy'}}
+                                            </td>
+                                            <td class="shoping__cart__total">
+                                              <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" (click)="get_order_id(item.id)"
+                                              data-bs-target="#model_detail"  title="Xem chi tiết đơn hàng">
+                                              <i style="font-size: 20px;" class="fas fa-eye"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#Modal_success" title="Đã hoàn thành"
+                                            (click)="openModal(item.id)">
+                                            <i  style="font-size: 20px;" class="fas fa-check"></i>
+                                          </button>
+                                            </td>
+                                            <td>
+                                              <button type="button" class="btn btn-close" data-bs-toggle="modal" data-bs-target="#Modal_cancel" title="Hủy đơn"
+                                              (click)="openModal(item.id)">
+                                              <!-- hủy đơn -->
+                                              <!-- <i style="font-size: 20px;" class="far fa-window-close"></i> -->
+                                            </button>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- đơn hàng đã hoàn thành -->
+                  <div class="tab-pane" id="tabs-4" role="tabpanel">
+                      <div class="product__details__tab__desc">
+                          <h6>Đơn hàng đã hoàn thành</h6>
+                          <div class="col-lg-12">
+                            <div class="shoping__cart__table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="col-lg-3">Mã đơn hàng</th>
+                                            <th class="col-lg-3">Trạng thái đơn hàng</th>
+                                            <th class="col-lg-3">Dự tính ngày nhận</th>
+                                            <th class="col-lg-3">Thao tác</th>
+                                            <!-- <th></th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of order">
+                                            <td class="shoping__cart__price">
+                                                <h5>{{ item.code_order }}</h5>
+                                            </td>
+                                            <td class="shoping__cart__price">
+                                              <div class="status-content" [ngStyle]="getStatusStyle(item.status)">{{ getStatusText(item.status) }}</div>
+                                            </td>
+                                            <td class="shoping__cart__quantity">
+                                              {{ item.delivery_date | date:'dd-MM-yyyy'}}
+                                            </td>
+                                            <td class="shoping__cart__total">
+                                              <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" (click)="get_order_id(item.id)"
+                                              data-bs-target="#model_detail"  title="Xem chi tiết đơn hàng">
+                                              <i style="font-size: 20px;" class="fas fa-eye"></i>
+                                            </button>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- đơn hàng đã hủy -->
+                  <div class="tab-pane" id="tabs-5" role="tabpanel">
+                      <div class="product__details__tab__desc">
+                        <h6>Đơn hàng bị hủy</h6>
+                        <div class="col-lg-12">
+                          <div class="shoping__cart__table">
+                              <table>
+                                  <thead>
+                                      <tr>
+                                          <th class="col-lg-3">Mã đơn hàng</th>
+                                          <th class="col-lg-3">Trạng thái đơn hàng</th>
+                                          <th class="col-lg-2">Dự tính ngày nhận</th>
+                                          <th class="col-lg-2">Thao tác</th>
+                                          <th class="col-lg-2">Đặt lại</th>
+                                          <!-- <th></th> -->
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr *ngFor="let item of order">
+                                          <td class="shoping__cart__price">
+                                              <h5>{{ item.code_order }}</h5>
+                                          </td>
+                                          <td class="shoping__cart__price">
+                                            <div class="status-content" [ngStyle]="getStatusStyle(item.status)">{{ getStatusText(item.status) }}</div>
+                                          </td>
+                                          <td class="shoping__cart__quantity">
+                                            {{ item.delivery_date | date:'dd-MM-yyyy'}}
+                                          </td>
+                                          <td class="shoping__cart__total">
+                                            <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" (click)="get_order_id(item.id)"
+                                            data-bs-target="#model_detail"  title="Xem chi tiết đơn hàng">
+                                            <i style="font-size: 20px;" class="fas fa-eye"></i>
+                                          </button>
+                                          </td>
+                                          <td>
+                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal_ph" title="Phục hồi đơn"
+                                            (click)="openModal(item.id)">
+                                            ⬅
+                                            <!-- <i   style="font-size: 20px;" class="fa-solid fa-hammer"></i> -->
+                                          </button>
+                                          </td>
+                                      </tr>
+
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+      </div>
+  </div>
+</section>
+<div class="modal fade" id="model_detail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"> CHI TIẾT ĐƠN HÀNG</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-6">
+            <label for="">Tên người nhận:</label>
+            <span  *ngIf="order_detail"> {{order_detail.receiver_name}}</span>
+          </div>
+          <div class="col-6">
+            <label for="">Số điện thoại:</label>
+            <span  *ngIf="order_detail"> {{order_detail.number_phone}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label for="">Địa chỉ giao hàng:</label>
+            <span  *ngIf="order_detail"> {{order_detail.receiver_address}}</span>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-6">
+            <label for="">Trạng thái: </label>
+            <!-- <span  *ngIf="order_detail" style="color: red;"> {{getStatusText(order_detail.status)}}</span> -->
+            <!-- <td> -->
+              <span   *ngIf="order_detail" class="status-content" [ngStyle]="getStatusStyle(order_detail.status)">{{ getStatusText(order_detail.status) }}</span>
+            <!-- </td> -->
+          </div>
+          <div class="col-6">
+            <label for="">Tổng hóa đơn: </label>
+            <span  *ngIf="order_detail" style="color: red;"> {{order_detail.total_money|currency:'VND' }}</span>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12">
+              <label for="">Thông tin sản phẩm:</label>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">stt</th>
+                  <th scope="col">Sản phẩm</th>
+                  <th scope="col">size</th>
+                  <th scope="col">màu</th>
+                  <th scope="col">Số lượng</th>
+                  <th scope="col">Giá</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="order_product">
+                <tr *ngFor="let item of order_product;let i = index">
+                  <td  class="ps-4">{{i+1}}</td>
+                  <td><img [src]="'http://127.0.0.1:8000/storage/image/product/'+item.product.images[0]?.image" alt="" style=" width: 150px;height: 100px;">{{ item.product.name }}</td>
+                  <td >{{ item.size.size }}</td>
+                  <td >{{ item.color.color }}</td>
+                  <td >{{item.quantity}}</td>
+                  <td style="color: red;">{{item.price|currency:'VND' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal hủy -->
+<div class="modal fade" id="Modal_cancel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Hủy đơn hàng</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc chắn muốn hủy đơn hàng này không 😢
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <!-- <button type="button" class="btn btn-danger" (click)="onDelete(id)">Xóa</button> -->
+        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="update_status_orders(id,5)">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal xác nhận -->
+<div class="modal fade" id="Modal_success" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Xác nhận đơn hàng!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Xác nhận đơn hàng thành công ✔
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="update_status_orders(id,2)">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal phục hồi đơn hàng -->
+<div class="modal fade" id="Modal_ph" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Phục hồi!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn có muốc đặt lại đơn hàng này!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="update_status_orders(id,1)">Phục hồi</button>
+      </div>
+    </div>
+  </div>
+</div>

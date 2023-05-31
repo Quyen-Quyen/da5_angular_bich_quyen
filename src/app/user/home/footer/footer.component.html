@@ -7,9 +7,9 @@
                       <a href="#"><img src="./assets/image/logo.png" alt=""></a>
                   </div>
                   <ul>
-                      <li>Địa chỉ: Cổng trường Đh Sư Phạm Kỹ Thuật Hưng Yên</li>
-                      <li>Số diện thoại: 0123.456.789</li>
-                      <li>Email: bichquyen.vat@gmail.com</li>
+                      <li>Địa chỉ: {{ store_information?.address }}</li>
+                      <li>Số diện thoại: {{ store_information?.number_phone }}</li>
+                      <li>Email: {{ store_information?.email }}</li>
                   </ul>
               </div>
           </div>
@@ -17,11 +17,11 @@
               <div class="footer__widget">
                   <h6> Links</h6>
                   <ul>
-                      <li><a href="#">Trang chủ</a></li>
-                      <li><a href="#">Cửa hàng</a></li>
-                      <li><a href="#">Mua sắm an toàn</a></li>
-                      <li><a href="#">Thông tin giao hàng</a></li>
-                      <li><a href="#">Chính sách bảo mật</a></li>
+                      <li><a href="">Trang chủ</a></li>
+                      <li><a href="san-pham">Cửa hàng</a></li>
+                      <li><a href="san-pham">Mua sắm an toàn</a></li>
+                      <li><a href="san-pham">Thông tin giao hàng</a></li>
+                      <li><a href="lien-he">Thông tin liên hệ</a></li>
                   </ul>
                   <ul>
                       <li><a href="#">Chúng ta là ai</a></li>
@@ -35,17 +35,18 @@
           </div>
           <div class="col-lg-4 col-md-12">
               <div class="footer__widget">
-                  <h6>Tham gia Bản tin của chúng tôi ngay bây giờ</h6>
-                  <p>Nhận thông tin cập nhật qua email về cửa hàng mới nhất của chúng tôi và các ưu đãi đặc biệt.</p>
+                  <h6>Chat với chúng tôi ngay bây giờ</h6>
+                  <!-- <p>Nhận thông tin cập nhật qua email về cửa hàng mới nhất của chúng tôi và các ưu đãi đặc biệt.</p>
                   <form action="#">
                       <input type="text" placeholder="Enter your mail">
                       <button type="submit" class="site-btn">Đăng ký</button>
-                  </form>
+                  </form> -->
                   <div class="footer__widget__social">
-                      <a href="#"><i class="fa fa-facebook"></i></a>
-                      <a href="#"><i class="fa fa-instagram"></i></a>
-                      <a href="#"><i class="fa fa-twitter"></i></a>
-                      <a href="#"><i class="fa fa-pinterest"></i></a>
+                      <a href="https://www.facebook.com/phut.mot.5015"><i class="fa fa-facebook"></i></a>
+                      <a href="https://www.instagram.com/quang_dung1406/"><i class="fa fa-instagram"></i></a>
+                      <a href="https://zalo.me/0869638364"><img src="./assets/image/banner/zalo-4.png" alt=""></a>
+                      <!-- <a href="#"><i class="fa fa-twitter"></i></a>
+                      <a href="#"><i class="fa fa-pinterest"></i></a> -->
                   </div>
               </div>
           </div>

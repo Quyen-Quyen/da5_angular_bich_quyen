@@ -1,13 +1,13 @@
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="./assets/image/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="./assets/image/banner/lh.jpg">
       <div class="container">
           <div class="row">
               <div class="col-lg-12 text-center">
                   <div class="breadcrumb__text">
-                      <h2>Contact Us</h2>
+                      <h2>Liên hệ với chúng tôi</h2>
                       <div class="breadcrumb__option">
-                          <a href="#">Home</a>
-                          <span>Contact Us</span>
+                          <a href="#">Trang chủ</a>
+                          <span>Liên hệ</span>
                       </div>
                   </div>
               </div>
@@ -23,28 +23,28 @@
                     <div class="contact__widget">
                         <span class="icon_phone"></span>
                         <h4>Số điện thoại</h4>
-                        <p>0123456789</p>
+                        <p>{{ store_information.number_phone }}</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget">
                         <span class="icon_pin_alt"></span>
                         <h4>Địa chỉ</h4>
-                        <p>Cổng trường Đh Sư Phạm Kỹ Thuật Hưng Yên</p>
+                        <p>{{ store_information.address }}</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget">
                         <span class="icon_clock_alt"></span>
                         <h4>Thời gian mở cửa</h4>
-                        <p>10:00 am đến 23:00 pm</p>
+                        <p>{{ store_information.open_time }}</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget">
                         <span class="icon_mail_alt"></span>
                         <h4>Email</h4>
-                        <p>bichquyen.vat@gmail.com</p>
+                        <p>{{ store_information.email }}</p>
                     </div>
                 </div>
             </div>

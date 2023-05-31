@@ -1837,7 +1837,7 @@ ol {
 	position: absolute;
 	left: 0;
 	top: 12px;
-	height: 1px;
+	/* height: 1px; */
 	width: 370px;
 	background: #ebebeb;
 	content: "";
@@ -1847,7 +1847,7 @@ ol {
 	position: absolute;
 	right: 0;
 	top: 12px;
-	height: 1px;
+	/* height: 1px; */
 	width: 370px;
 	background: #ebebeb;
 	content: "";

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(
+    private admin: AdminService,
+  ) { }
+  store_information:any;
   ngOnInit() {
+    this.admin.get_store_information().subscribe((data:any)=>{
+      this.store_information=data.store_information[0]
+    })
   }
 
 }

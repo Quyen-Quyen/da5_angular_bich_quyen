@@ -6,8 +6,8 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__left">
                         <ul>
-                            <li><i class="fa fa-envelope"></i> bichquyen.vat@gmail.com</li>
-                            <li>Giao hàng miễn phí cho tất cả đơn hàng $99</li>
+                            <li><i class="fa fa-envelope"></i> {{ store_information?.email }}</li>
+                            <li>Giao hàng miễn phí cho tất cả đơn hàng 1.000.000</li>
                         </ul>
                     </div>
                 </div>
@@ -20,12 +20,13 @@
                             <a href="#"><i class="fa fa-pinterest-p"></i></a>
                         </div>
                         <div class="header__top__right__language">
-                            <img src="./assets/image/language.png" alt="">
-                            <div>English</div>
+                            <img style="width: 27px; height: 14px" src="http://127.0.0.1:8000/storage/{{ banner_4 }}" alt="">
+                            <div>Tài khoản</div>
                             <span class="arrow_carrot-down"></span>
                             <ul>
-                                <li><a href="#">Spanis</a></li>
-                                <li><a href="#">English</a></li>
+                                <li><a style="color: white;" (click)="onlogout()">Đăng xuất</a></li>
+                                <!-- <li><a href="#">English</a></li>
+                                <li><a href="#">English</a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -37,7 +38,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="#"><img src="./assets/image/logo.png" alt=""></a>
+                    <a href="#"><img src="http://127.0.0.1:8000/storage/{{ banner_4 }}" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-7">
@@ -55,6 +56,7 @@
                             </ul>
                         </li>
                         <!-- <li><a href="blog">Bài viết</a></li> -->
+                        <li><a href="don-hang">Đơn hàng</a></li>
                         <li><a href="lien-he">Liên hệ</a></li>
                     </ul>
                 </nav>
@@ -63,6 +65,8 @@
                 <div class="header__cart">
                     <ul>
                         <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+
+
                         <li><a href="gio-hang"><i class="fa fa-shopping-bag"></i>
                           <span>{{ itemIncart }}</span>
                         </a></li>

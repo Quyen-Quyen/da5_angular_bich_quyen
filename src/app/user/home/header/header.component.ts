@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/cart_Service/cart.service';
 import { IndexComponent } from '../component/index/index.component';
 import { AdminService } from '../../../service/admin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,28 +15,46 @@ export class HeaderComponent implements OnInit {
   constructor(
     private cartService:CartService,
     private admin: AdminService,
+    private router: Router,
     ) { }
-
+    store_information:any;
   ngOnInit() {
-    // this.cartService.loadCart.subscribe((data:any)=>{
-    //   this.itemIncart = data.length;
-    //   console.log('quality cart',this.itemIncart)
-    // })
-    // this.cartService.loadCart();
-    // this.items = this.cartService.getItems();
-    // this.itemIncart=this.cartService.getItems().length;
-    // console.log('nên pie',this.itemIncart)
-    // this.index.getall_categories_section_begin();
-    // this.cartService.saveCart();
+    this.admin.get_store_information().subscribe((data:any)=>{
+      this.store_information=data.store_information[0]
+    })
     this.get_cart();
+    this.get_banner();
   }
   // itemIncart:any;
   get_cart(){
-    // this.admin.get_all_product() .subscribe((data: any)
     this.admin.getallcart().subscribe((data:any)=>{
-      // this.itemIncart=data.cart_details.length;
-      // this.info_product=data.cart_details
-      // console.log(  'data đếm số sản phẩm',this.itemIncart);
     })
   };
+  banner_4:any;
+  get_banner(){
+    this.admin.get_banner().subscribe(
+      (data: any) => {
+        this.banner_4 = data.banner_4?.image;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  onlogout() {
+    const confirmed = confirm('Bạn có muốn đăng xuất không?');
+    if (confirmed) {
+      this.admin.logout().subscribe((data) => {
+        localStorage.removeItem('profanis_auth');
+        this.router.navigate(['/login']).then(() => {
+          // this.toastr.success('Bạn đã đăng xuất thành công !!');
+          alert('Bạn đã đăng xuất thành công !!')
+          // timer(3000).subscribe(() => {  // Tạo một timer chạy trong 3 giây
+          //   window.location.reload();
+          // });
+        });
+      });
+    } else {
+    }
+  }
 }

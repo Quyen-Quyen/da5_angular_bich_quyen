@@ -23,6 +23,7 @@ export class IndexComponent implements OnInit {
   all_product: any;
   featured_products: any;
   featured_post: any;
+  store_information:any;
   //phân trang
   // POSTS: any;
   page: number = 1;
@@ -67,16 +68,19 @@ export class IndexComponent implements OnInit {
   ) {}
   private subscription: Subscription;
   ngOnInit(): void {
+    this.get_store_information();
     this.getall_categories_section_begin();
     this.get_posts();
     this.get_cart();
-    // gọi hàm loadCart() mới có dữ liệu cho hàm getItem()
     this.get_banner();
-    this.cartService.loadCart();
-    // console.log( this.cartService.loadCart())
-    // this.items = this.cartService.getItems();
-    // console.log('haha', this.items);
-    // this.get_prodcut_by_cate();
+
+
+  }
+  get_store_information(){
+    this.admin.get_store_information().subscribe((data:any)=>{
+      this.store_information=data.store_information[0]
+
+    })
   }
   getall_categories_section_begin() {
     this.subscription = this.admin.get_index_product().subscribe(
@@ -108,12 +112,18 @@ export class IndexComponent implements OnInit {
       }
     );
   }
-  banner:any;
+  banner_1:any;
+  banner_2:any;
+  banner_3:any;
+  banner_4:any;
   get_banner(){
     this.admin.get_banner().subscribe(
       (data: any) => {
         // console.log(data.type_posts);
-        this.banner = data.banner.image;
+        this.banner_1 = data.banner_1?.image;
+        this.banner_2 = data.banner_2?.image;
+        this.banner_3 = data.banner_3?.image;
+        this.banner_4 = data.banner_4?.image;
         // console.log('ảnh11111', data.banner.image);
         // this.type_posts = data.type_posts;
       },
@@ -172,14 +182,14 @@ export class IndexComponent implements OnInit {
       const product_id = product.id;
       const quantity = 1;
 
-      this.admin.create_cart(product_id, quantity).subscribe(
-        (data) => {
-          alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!');
-        },
-        (error) => {
-          console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
-        }
-      );
+      // this.admin.create_cart(product_id, quantity).subscribe(
+      //   (data) => {
+      //     alert('Đã thêm thành công 1 sản phẩm vào giỏ hàng!');
+      //   },
+      //   (error) => {
+      //     console.error('Lỗi khi thêm sản phẩm vào giỏ hàng', error);
+      //   }
+      // );
     });
   }
 
