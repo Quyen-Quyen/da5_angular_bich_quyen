@@ -1,28 +1,28 @@
 		#advertisement {
 			position: fixed;
 			top: 45%;
-      width: 15%;
+     		width: 15%;
 			left: 0;
 			transform: translateY(-50%);
 			background-color: #f2f2f2;
-			padding: 20px;
-			/* border-right: 5px solid #7fad39; */
+			padding: 5px;
+			/* border-right: 5px solid #b6a385; */
 		}
 		#advertisement-right {
 			position: fixed;
-			top: 40%;
-      width: 15%;
+			top: 60%;
+     
 			right: 0;
 			transform: translateY(-50%);
 			background-color: #f2f2f2;
-			padding: 20px;
-			border-left: 5px solid #7fad39;
+			padding: 0px;
+			border-left: 5px solid #b6a385;
 		}
 
 		.advertisement {
 			font-size: 30px;
 			font-weight: bold;
-			color: #7fad39;
+			color: #b6a385;
 			margin-bottom: 10px;
 		}
 
@@ -35,7 +35,7 @@
 		}
 
 		.button {
-			background-color: #7fad39;
+			background-color: #b6a385;
 			color: #ffffff;
 			font-size: 20px;
 			padding: 10px 20px;
